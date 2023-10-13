@@ -50,37 +50,30 @@
             <input type="email" class="form-control" id="inputPassword4" />
           </div>
           <div class="col-12">
-            <label for="inputAddress" class="form-label">Address</label>
+            <label for="inputPhone" class="form-label">Phone Number</label>
             <input
-              type="text"
+              type="number"
               class="form-control"
-              id="inputAddress"
-              placeholder="1234 Main St"
+              id="inputPhone"
+              placeholder="+91 0000000000"
             />
           </div>
-          <div class="col-12">
-            <label for="inputAddress2" class="form-label">Address 2</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputAddress2"
-              placeholder="Apartment, studio, or floor"
-            />
+          <div class="col-md-6">
+            <label for="inputRole" class="form-label">Role</label>
+            <select id="inputRole" class="form-select">
+              <option selected>Choose...</option>
+              <option>user</option>
+              <option>admin</option>
+              <option>superadmin</option>
+            </select>
           </div>
           <div class="col-md-6">
             <label for="inputCity" class="form-label">City</label>
             <input type="text" class="form-control" id="inputCity" />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-12">
             <label for="inputState" class="form-label">State</label>
-            <select id="inputState" class="form-select">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label for="inputZip" class="form-label">Zip</label>
-            <input type="text" class="form-control" id="inputZip" />
+            <input type="text" class="form-control" id="inputState" />
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-primary">Create</button>
