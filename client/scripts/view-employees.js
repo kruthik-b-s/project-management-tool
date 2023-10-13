@@ -8,17 +8,25 @@ function populateTable(jsonData) {
     const row = document.createElement('tr');
     const idCell = document.createElement('th');
     const nameCell = document.createElement('td');
+    const nameAnchor = document.createElement('a');
+    nameAnchor.href = `http://localhost:3000/api/employee/${employee.id}`;
     const designationCell = document.createElement('td');
     const performanceCell = document.createElement('td');
+    const performanceAnchor = document.createElement('a');
+    performanceAnchor.href = `http://localhost:3000/api/employee/performance/${employee.id}`;
 
     idCell.textContent = employee.id;
-    nameCell.textContent = employee.name;
+    // nameCell.textContent = employee.name;
+    nameAnchor.textContent = employee.name;
     designationCell.textContent = employee.designation;
-    performanceCell.textContent = employee.performance;
+    // performanceCell.textContent = employee.performance;
+    performanceAnchor.textContent = employee.performance;
 
     row.appendChild(idCell);
+    nameCell.appendChild(nameAnchor);
     row.appendChild(nameCell);
     row.appendChild(designationCell);
+    performanceCell.appendChild(performanceAnchor);
     row.appendChild(performanceCell);
 
     tableBody.appendChild(row);

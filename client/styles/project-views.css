@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+}
+
+.title p {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.projects-table {
+  width: 100vw;
+  height: 100vh;
+  padding: 0px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.projects {
+  min-width: 40%;
+  max-width: 50%;
+}

@@ -37,5 +37,7 @@ export class AuthController {
     } else {
       res.redirect('http://localhost:5500/client/pages/home-user.html');
     }
+
+    // res.redirect('/client/pages/home-sa.html');
   }
 }
