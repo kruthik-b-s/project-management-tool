@@ -11,13 +11,17 @@ datasource db {
 }
 
 model Employee {
-  employee_id   Int     @id @default(autoincrement())
-  employee_name String
-  department    String?
-  email         String  @unique
-  phone_number  String?
-  Role          Role?   @relation(fields: [roleRole_id], references: [role_id])
-  roleRole_id   Int?
+  employee_id        Int                @id @default(autoincrement())
+  employee_name      String
+  department         String?
+  email              String             @unique
+  phone_number       String?
+  Role               Role               @relation(fields: [employee_role_id], references: [role_id])
+  employee_role_id   Int
+  performance        Performance[]
+  projects           Project[]
+  leaves             Leave?
+  leave_applications LeaveApplication[]
 }
 
 model Role {
@@ -25,4 +29,54 @@ model Role {
   role_name   String     @unique
   permissions String[]
   employees   Employee[]
+}
+
+model Performance {
+  performance_id          Int       @id @default(autoincrement())
+  rating                  Int
+  comments                String
+  given_by_employee_id    Int
+  Employee                Employee? @relation(fields: [performance_employee_id], references: [employee_id])
+  performance_employee_id Int?
+}
+
+model Project {
+  project_id      Int            @id @default(autoincrement())
+  project_name    String         @unique
+  client          String
+  start_date      DateTime
+  end_date        DateTime
+  employees       Employee[]
+  project_details ProjectDetail?
+}
+
+model ProjectDetail {
+  project_detail_id  Int      @id @default(autoincrement())
+  project_url        String   @unique
+  login_name         String
+  login_password     String
+  tech_stack         String[]
+  project            Project  @relation(fields: [project_details_id], references: [project_id])
+  project_details_id Int      @unique
+}
+
+model Leave {
+  leave_id          Int      @id @default(autoincrement())
+  casual_leaves     Int
+  sick_leaves       Int
+  floater_leaves    Int
+  employee          Employee @relation(fields: [employee_leave_id], references: [employee_id])
+  employee_leave_id Int      @unique
+}
+
+model LeaveApplication {
+  leave_application_id          Int       @id @default(autoincrement())
+  leave_type                    String
+  from_date                     DateTime
+  till_date                     DateTime
+  reason                        String
+  status                        String
+  comments                      String
+  Employee                      Employee? @relation(fields: [leave_application_employee_id], references: [employee_id])
+  leave_application_employee_id Int?
 }

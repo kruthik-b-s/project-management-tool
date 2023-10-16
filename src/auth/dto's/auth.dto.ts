@@ -1,6 +1,7 @@
 export interface LoginDto {
   employee_name: string;
-  department?: string;
   email: string;
+  department: string;
+  role: string;
   phone_number?: string;
 }

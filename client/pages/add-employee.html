@@ -40,14 +40,24 @@
         <div class="title">
           <p>Create a user</p>
         </div>
-        <form class="row g-3">
+        <form class="row g-3" action="/api/auth/create" method="post">
           <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputEmail4" />
+            <label for="inputName" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              name="employee_name"
+            />
           </div>
           <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputPassword4" />
+            <label for="inputEmail" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="inputEmail"
+              name="email"
+            />
           </div>
           <div class="col-12">
             <label for="inputPhone" class="form-label">Phone Number</label>
@@ -56,24 +66,26 @@
               class="form-control"
               id="inputPhone"
               placeholder="+91 0000000000"
+              name="phone_number"
             />
           </div>
           <div class="col-md-6">
             <label for="inputRole" class="form-label">Role</label>
-            <select id="inputRole" class="form-select">
-              <option selected>Choose...</option>
+            <select id="inputRole" class="form-select" name="role">
               <option>user</option>
               <option>admin</option>
               <option>superadmin</option>
             </select>
           </div>
           <div class="col-md-6">
-            <label for="inputCity" class="form-label">City</label>
-            <input type="text" class="form-control" id="inputCity" />
-          </div>
-          <div class="col-md-12">
-            <label for="inputState" class="form-label">State</label>
-            <input type="text" class="form-control" id="inputState" />
+            <label for="inputDept" class="form-label">Department</label>
+            <select id="inputDept" class="form-select" name="department">
+              <option selected></option>
+              <option>Web</option>
+              <option>Android</option>
+              <option>IOS</option>
+              <option>Design</option>
+            </select>
           </div>
           <div class="col-12">
             <button type="submit" class="btn btn-primary">Create</button>

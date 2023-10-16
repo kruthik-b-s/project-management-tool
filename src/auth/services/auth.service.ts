@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
+import { LoginDto } from "../dto's/auth.dto";
 
 @Injectable()
 export class AuthService {
@@ -37,7 +38,7 @@ export class AuthService {
           data: {
             employee_name: userDetails.name,
             email: userDetails.email,
-            roleRole_id: userRole.role_id,
+            employee_role_id: userRole.role_id,
           },
         });
       }
@@ -48,25 +49,80 @@ export class AuthService {
     }
   }
 
+  async createUser(userDetails: LoginDto) {
+    try {
+      let user = await this.prisma.employee.findUnique({
+        where: {
+          email: userDetails.email,
+        },
+      });
+
+      const role = await this.prisma.role.findUnique({
+        where: {
+          role_name: userDetails.role,
+        },
+      });
+
+      if (user) {
+        return { message: 'Employee already exists' };
+      }
+
+      user = await this.prisma.employee.create({
+        data: {
+          employee_name: userDetails.employee_name,
+          email: userDetails.email,
+          department: userDetails.department,
+          employee_role_id: role.role_id,
+        },
+      });
+
+      return { message: 'Employee created sucessfully' };
+    } catch (error) {
+      return { message: 'Failed to create employee', error: error.message };
+    }
+  }
+
   async findUserByEmail(email: string) {
-    return await this.prisma.employee.findUnique({
-      where: {
-        email: email,
-      },
-      include: {
-        Role: {
-          select: {
-            role_name: true,
+    try {
+      return await this.prisma.employee.findUnique({
+        where: {
+          email: email,
+        },
+        include: {
+          Role: {
+            select: {
+              role_name: true,
+            },
           },
         },
-      },
-    });
+      });
+    } catch (error) {
+      return {
+        message: 'User not found with the given email',
+        Role: { role_name: null },
+        error: error.message,
+      };
+    }
+  }
+
+  async getAllEmployees() {
+    try {
+      const users = await this.prisma.employee.findMany();
+
+      return users;
+    } catch (error) {
+      return { message: 'Failed to fetch users', error: error.message };
+    }
   }
 
   async generateToken(payload: { sub: number; email: string }) {
-    return await this.jwt.signAsync(payload, {
-      secret: process.env.JWT_ACCESS_SECRET,
-      expiresIn: '1h',
-    });
+    try {
+      return await this.jwt.signAsync(payload, {
+        secret: process.env.JWT_ACCESS_SECRET,
+        expiresIn: '1h',
+      });
+    } catch (error) {
+      return { message: 'Failed to generate token', error: error.message };
+    }
   }
 }

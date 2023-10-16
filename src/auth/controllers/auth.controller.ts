@@ -1,7 +1,17 @@
-import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Redirect,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { GoogleAuthGuard } from '../guards/google.guard';
 import { AuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
+import { LoginDto } from "../dto's/auth.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -31,13 +41,38 @@ export class AuthController {
     // });
 
     if (user.Role.role_name === 'superadmin') {
-      res.redirect('http://localhost:5500/client/pages/home-sa.html');
+      res.redirect('/client/pages/home-sa.html');
     } else if (user.Role.role_name === 'admin') {
-      res.redirect('http://localhost:5500/client/pages/home-admin.html');
+      res.redirect('/client/pages/home-admin.html');
     } else {
-      res.redirect('http://localhost:5500/client/pages/home-user.html');
+      res.redirect('/client/pages/home-user.html');
     }
 
-    // res.redirect('/client/pages/home-sa.html');
+    // For serving files to front-end that is de-coupled
+    // res.redirect('http://localhost:5500/client/pages/home-sa.html');
+  }
+
+  @Post('create')
+  @Redirect('/client/pages/home-sa.html')
+  createUserController(@Body() userDetails: LoginDto) {
+    try {
+      this.service.createUser(userDetails);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  @Get('getAllEmployees')
+  viewAllEmployeesController() {
+    try {
+      return this.service.getAllEmployees();
+    } catch (error) {
+      return {
+        employee_id: null,
+        employee_name: null,
+        department: null,
+        performance: null,
+      };
+    }
   }
 }
