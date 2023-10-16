@@ -11,11 +11,11 @@ function populateTable(jsonData) {
     const idCell = document.createElement('th');
     const nameCell = document.createElement('td');
     const nameAnchor = document.createElement('a');
-    nameAnchor.href = `http://localhost:3000/api/employee/${employee.id}`;
+    nameAnchor.href = `http://localhost:3000/api/employee/${employee.employee_id}`;
     const departmentCell = document.createElement('td');
     const performanceCell = document.createElement('td');
     const performanceAnchor = document.createElement('a');
-    performanceAnchor.href = `http://localhost:3000/api/employee/performance/${employee.id}`;
+    performanceAnchor.href = `http://localhost:3000/api/employee/performance/${employee.employee_id}`;
 
     idCell.textContent = employee.employee_id;
     // nameCell.textContent = employee.name;
