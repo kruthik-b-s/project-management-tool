@@ -9,6 +9,18 @@ function createLeaveCards(jsonData) {
     const cardBody = document.createElement('div');
     const cardTitle = document.createElement('h5');
     const cardText = document.createElement('p');
+
+    const commentDiv = document.createElement('div');
+    commentDiv.className = 'mb-3';
+    const commentLabel = document.createElement('label');
+    commentLabel.htmlFor = 'inputComments';
+    commentLabel.className = 'form-label';
+    commentLabel.textContent = 'Comments:';
+    const commentArea = document.createElement('textarea');
+    commentArea.className = 'form-control';
+    commentArea.id = 'inputComments';
+    commentArea.rows = 1;
+
     const approveButton = document.createElement('a');
     const rejectButton = document.createElement('a');
 
@@ -23,6 +35,9 @@ function createLeaveCards(jsonData) {
     cardText.className = 'card-text';
     cardText.textContent = leave.reason;
 
+    commentDiv.appendChild(commentLabel);
+    commentDiv.appendChild(commentArea);
+
     approveButton.href = '#';
     approveButton.className = 'btn btn-primary';
     approveButton.textContent = 'Approve';
@@ -32,6 +47,7 @@ function createLeaveCards(jsonData) {
 
     cardBody.appendChild(cardTitle);
     cardBody.appendChild(cardText);
+    cardBody.appendChild(commentDiv);
     cardBody.appendChild(approveButton);
     cardBody.appendChild(rejectButton);
     cardDiv.appendChild(cardBody);
