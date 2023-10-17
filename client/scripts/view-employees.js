@@ -11,7 +11,7 @@ function populateTable(jsonData) {
     const idCell = document.createElement('th');
     const nameCell = document.createElement('td');
     const nameAnchor = document.createElement('a');
-    nameAnchor.href = `http://localhost:3000/api/employee/${employee.employee_id}`;
+    nameAnchor.href = `http://localhost:3000/client/pages/employee-details.html?id=${employee.employee_id}`;
     const departmentCell = document.createElement('td');
     const performanceCell = document.createElement('td');
     const performanceAnchor = document.createElement('a');
@@ -40,7 +40,7 @@ fetch(url, { method: 'GET' })
     return response.json();
   })
   .then((data) => {
-    console.log(data);
+    // console.log(data);
     populateTable(data);
     new DataTable('#paged-table', {
       dom: 'rtip',

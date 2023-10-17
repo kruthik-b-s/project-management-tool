@@ -5,6 +5,12 @@
   font-family: 'Raleway', sans-serif;
 }
 
+#breadcrumb {
+  position: absolute;
+  top: 70px;
+  left: 120px;
+}
+
 .employee-table {
   width: 100vw;
   height: 100vh;

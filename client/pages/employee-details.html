@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap files -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../styles/employee-details.css" />
+    <title>Employee Details</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar fixed-top" style="background-color: #0d6efd">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <h4 style="color: white">Project Management Tool</h4>
+          </a>
+        </div>
+      </nav>
+
+      <nav
+        style="--bs-breadcrumb-divider: '>'"
+        aria-label="breadcrumb"
+        id="breadcrumb"
+      >
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="./home-sa.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <a href="./view-employees.html">View Employees</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Employee Details
+          </li>
+        </ol>
+      </nav>
+    </header>
+
+    <main>
+      <div class="employee-details">
+        <div class="personal-details">
+          <form class="row g-3" action="/api/auth/" method="post">
+            <fieldset disabled>
+              <div class="col-md-12" id="input">
+                <label for="inputId" class="form-label">Employee ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="inputId"
+                  name="employee_id"
+                />
+              </div>
+
+              <div class="col-md-12" id="input">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="inputEmail"
+                  name="email"
+                />
+              </div>
+            </fieldset>
+            <div class="col-md-12" id="input">
+              <label for="inputName" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputName"
+                name="employee_name"
+              />
+            </div>
+
+            <div class="col-md-12" id="input">
+              <label for="inputDepartment" class="form-label">Department</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputDepartment"
+                name="department"
+              />
+            </div>
+
+            <div class="col-md-12" id="input">
+              <label for="inputPhone" class="form-label">Phone Number</label>
+              <input
+                type="number"
+                class="form-control"
+                id="inputPhone"
+                name="phone_number"
+              />
+            </div>
+
+            <div class="col-md-12" id="input">
+              <label for="inputRole" class="form-label">Role</label>
+              <select id="inputRole" class="form-select" name="role">
+                <option>user</option>
+                <option>admin</option>
+                <option>superadmin</option>
+              </select>
+            </div>
+
+            <div>
+              <a class="btn btn-primary" id="edit-button" role="button">Edit</a>
+              <a
+                class="btn btn-primary"
+                href="#"
+                id="update-button"
+                role="button"
+                >Update</a>
+            </div>
+          </form>
+        </div>
+
+        <div class="projects">
+          <div class="projects-title">
+            <p>Projects</p>
+          </div>
+          <div class="employee-projects"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="../scripts/employee-details.js" type="module"></script>
+
+    <!-- Bootstrap scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

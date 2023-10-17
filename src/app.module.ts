@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { PassportModule } from '@nestjs/passport';
 import { PathModule } from './path/path.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PathModule } from './path/path.module';
     PrismaModule,
     PassportModule.register({ session: true }),
     PathModule,
+    EmployeeModule,
   ],
 })
 export class AppModule {}
