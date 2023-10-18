@@ -49,56 +49,42 @@
       >
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="./home-sa.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">View Projects</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            View Projects
+          </li>
         </ol>
       </nav>
     </header>
 
     <main>
       <div class="projects-table">
-        <div class="projects">
+        <div>
           <div class="title">
-            <p>Ongoing Projects</p>
+            <p>Projects</p>
           </div>
-          <table class="table table-bordered" id="ongoing-table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">Client</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Other Details</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <div aria-label="Page navigation example">
-            <ul></ul>
+          <div>
+            <select name="filter" id="table-filter">
+              <option value="on-going" selected>on-going</option>
+              <option value="completed">completed</option>
+              <option value="all">all</option>
+            </select>
           </div>
         </div>
 
-        <div class="projects">
-          <div class="title">
-            <p>Completed Projects</p>
-          </div>
-          <table class="table table-bordered" id="completed-table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">Client</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Other Details</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <div aria-label="Page navigation example">
-            <ul></ul>
-          </div>
-        </div>
+        <table class="table table-bordered" id="projects">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Project Name</th>
+              <th scope="col">Client</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Other Details</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
     </main>
 
@@ -109,6 +95,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="../scripts/view-projects.js" type="module"></script>
+    <!-- <script src="../scripts/authenticate.js" type="module"></script> -->
 
     <!-- Bootstrap scripts -->
     <script

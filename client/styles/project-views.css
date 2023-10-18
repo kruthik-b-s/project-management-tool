@@ -11,21 +11,22 @@
   left: 120px;
 }
 
-.title p {
+.title {
   font-size: 2rem;
   font-weight: 700;
 }
 
 .projects-table {
-  width: 100vw;
-  height: 100vh;
-  padding: 0px 120px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  position: absolute;
+  top: 120px;
+  left: 400px;
 }
 
-.projects {
-  min-width: 40%;
-  max-width: 50%;
+#projects{
+  min-width: 700px;
+  max-width: 700px;
 }

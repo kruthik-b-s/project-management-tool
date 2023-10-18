@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Redirect,
   Req,
@@ -17,6 +18,13 @@ import { LoginDto } from "../dto's/auth.dto";
 export class AuthController {
   constructor(private service: AuthService) {}
 
+  @Get('verify/:token')
+  async authenticate(@Param('token') token: string) {
+    const payload = await this.service.verifyToken(token);
+    // console.log(payload);
+    return payload;
+  }
+
   @Get('google')
   @UseGuards(GoogleAuthGuard)
   handleLogin() {}
@@ -29,16 +37,17 @@ export class AuthController {
       authUser.user_details.email,
     );
 
-    // const token = await this.service.generateToken({
-    //   sub: user.employee_id,
-    //   email: user.email,
-    // });
+    const token = await this.service.generateToken({
+      sub: user.employee_id,
+      email: user.email,
+      role: user.Role.role_name,
+    });
 
-    // res.cookie('accessToken', token, {
-    //   httpOnly: true,
-    //   secure: true,
-    //   maxAge: 600000,
-    // });
+    res.cookie('accessToken', token, {
+      // httpOnly: true, // cannot be accessed by scripts if set to true
+      secure: true,
+      maxAge: 600000,
+    });
 
     if (user.Role.role_name === 'superadmin') {
       res.redirect('/client/pages/home-sa.html');

@@ -97,11 +97,12 @@ export class AuthService {
         },
       });
     } catch (error) {
-      return {
-        message: 'User not found with the given email',
-        Role: { role_name: null },
-        error: error.message,
-      };
+      // return {
+      //   message: 'User not found with the given email',
+      //   Role: { role_name: null },
+      //   error: error.message,
+      // };
+      throw new Error(error.message);
     }
   }
 
@@ -115,7 +116,7 @@ export class AuthService {
     }
   }
 
-  async generateToken(payload: { sub: number; email: string }) {
+  async generateToken(payload: { sub: number; email: string; role: string }) {
     try {
       return await this.jwt.signAsync(payload, {
         secret: process.env.JWT_ACCESS_SECRET,
@@ -123,6 +124,16 @@ export class AuthService {
       });
     } catch (error) {
       return { message: 'Failed to generate token', error: error.message };
+    }
+  }
+
+  async verifyToken(token: string) {
+    try {
+      return await this.jwt.verifyAsync(token, {
+        secret: process.env.JWT_ACCESS_SECRET,
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
 }
