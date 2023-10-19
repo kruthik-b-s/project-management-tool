@@ -4,6 +4,7 @@ const url =
 const table = document.querySelector('#projects tbody');
 
 function populateTable(jsonData) {
+  table.innerHTML = '';
   for (const project of jsonData) {
     const row = document.createElement('tr');
     const idCell = document.createElement('td');
@@ -37,17 +38,38 @@ function populateTable(jsonData) {
   }
 }
 
+function filterOngoingData(jsonData) {
+  const ongoingProjects = jsonData.filter(
+    (project) => project.status === 'on-going',
+  );
+  populateTable(ongoingProjects);
+}
+
+function filterCompletedData(jsonData) {
+  const completedProjects = jsonData.filter(
+    (project) => project.status === 'completed',
+  );
+  populateTable(completedProjects);
+}
+
+const filterOption = document.querySelector('#table-filter');
+
 fetch(url)
   .then((response) => {
     return response.json();
   })
   .then((data) => {
-    populateTable(data);
+    filterOngoingData(data);
 
-    new DataTable('#projects', {
-      dom: 'rtip',
-      info: false,
-      ordering: false,
+    filterOption.addEventListener('change', (e) => {
+      // console.log(e.target.value);
+      if (e.target.value === 'completed') {
+        filterCompletedData(data);
+      } else if (e.target.value === 'all') {
+        populateTable(data);
+      } else {
+        filterOngoingData(data);
+      }
     });
   })
   .catch((err) => {
