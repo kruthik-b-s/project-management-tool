@@ -11,6 +11,10 @@
   left: 120px;
 }
 
+#home {
+  padding: 0px;
+}
+
 #cards {
   width: 100vw;
   height: 100vh;

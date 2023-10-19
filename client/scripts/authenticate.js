@@ -14,6 +14,18 @@ let accessToken;
 //   role = 'superadmin';
 // }
 
+const homeAnchor = document.querySelector('#home');
+
+function redirectBreadcrumb(role) {
+  if (role === 'user') {
+    window.location.href = '/client/pages/home-user.html';
+  } else if (role === 'admin') {
+    window.location.href = '/client/pages/home-admin.html';
+  } else if (role === 'superadmin') {
+    window.location.href = '/client/pages/home-sa.html';
+  }
+}
+
 if (cookies) {
   const accessTokenCookie = cookies
     .split('; ')
@@ -25,14 +37,13 @@ if (cookies) {
     fetch(`/api/auth/verify/${accessToken}`)
       .then((response) => {
         return response.json();
-        // console.log(response.json());
       })
       .then((data) => {
         console.log(data);
-        // console.log(data.role, role);
-        // if (data.role !== role) {
-        //   window.history.back();
-        // }
+        console.log(homeAnchor);
+        homeAnchor.addEventListener('click', () => {
+          redirectBreadcrumb(data.role);
+        });
       })
       .catch((error) => {
         console.log(error);

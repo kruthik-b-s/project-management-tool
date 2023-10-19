@@ -48,7 +48,9 @@
         id="breadcrumb"
       >
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="./home-sa.html">Home</a></li>
+          <li class="breadcrumb-item">
+            <button id="home" class="btn btn-link">Home</button>
+          </li>
           <li class="breadcrumb-item active" aria-current="page">
             View Projects
           </li>
@@ -70,7 +72,7 @@
             </select>
           </div>
         </div>
-        
+
         <div class="scrollable">
           <table class="table table-bordered" id="projects">
             <thead>
@@ -97,7 +99,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="../scripts/view-projects.js" type="module"></script>
-    <!-- <script src="../scripts/authenticate.js" type="module"></script> -->
+    <script src="../scripts/authenticate.js" defer type="module"></script>
 
     <!-- Bootstrap scripts -->
     <script

@@ -11,6 +11,10 @@
   left: 120px;
 }
 
+#home {
+  padding: 0px;
+}
+
 .employee-table {
   width: 100vw;
   height: 100vh;
