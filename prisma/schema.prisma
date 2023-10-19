@@ -11,17 +11,18 @@ datasource db {
 }
 
 model Employee {
-  employee_id        Int                @id @default(autoincrement())
-  employee_name      String
-  department         String?
-  email              String             @unique
-  phone_number       String?
-  Role               Role               @relation(fields: [employee_role_id], references: [role_id])
-  employee_role_id   Int
-  performance        Performance[]
-  projects           Project[]
-  leaves             Leave?
-  leave_applications LeaveApplication[]
+  employee_id              Int                @id @default(autoincrement())
+  employee_name            String
+  department               String?
+  email                    String             @unique
+  phone_number             String?
+  Role                     Role               @relation(fields: [employee_role_id], references: [role_id])
+  employee_role_id         Int
+  reporting_to_employee_id Int?
+  performance              Performance[]
+  projects                 Project[]
+  leaves                   Leave?
+  leave_applications       LeaveApplication[]
 }
 
 model Role {
@@ -46,6 +47,7 @@ model Project {
   client          String
   start_date      DateTime
   end_date        DateTime
+  status          String
   employees       Employee[]
   project_details ProjectDetail?
 }
