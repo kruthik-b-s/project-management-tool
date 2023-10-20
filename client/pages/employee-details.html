@@ -108,13 +108,27 @@
               />
             </div>
 
-            <div class="col-md-12" id="input">
-              <label for="inputRole" class="form-label">Role</label>
-              <select id="inputRole" class="form-select" name="role">
-                <option>user</option>
-                <option>admin</option>
-                <option>superadmin</option>
-              </select>
+            <div class="role-reporting">
+              <div class="col-md-5" id="input">
+                <label for="inputRole" class="form-label">Role</label>
+                <select id="inputRole" class="form-select" name="role">
+                  <option>user</option>
+                  <option>admin</option>
+                  <option>superadmin</option>
+                </select>
+              </div>
+
+              <div class="col-md-5" id="input">
+                <label for="inputReporting" class="form-label"
+                  >Reporting to</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="inputReporting"
+                  name="reporting_to"
+                />
+              </div>
             </div>
 
             <div>
