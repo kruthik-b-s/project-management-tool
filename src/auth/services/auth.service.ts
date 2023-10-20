@@ -92,6 +92,7 @@ export class AuthService {
           Role: {
             select: {
               role_name: true,
+              permissions: true,
             },
           },
         },
@@ -116,7 +117,12 @@ export class AuthService {
     }
   }
 
-  async generateToken(payload: { sub: number; email: string; role: string }) {
+  async generateToken(payload: {
+    sub: number;
+    email: string;
+    role: string;
+    permissions: string[];
+  }) {
     try {
       return await this.jwt.signAsync(payload, {
         secret: process.env.JWT_ACCESS_SECRET,

@@ -1,19 +1,6 @@
 const cookies = document.cookie;
 let accessToken;
 
-// let role;
-// let userPages = ['home-user.html'];
-// let adminPages = ['home-admin.html'];
-// let superAdminPages = ['home-sa.html'];
-
-// if (userPages.includes(window.location.href.split('/')[-1])) {
-//   role = 'user';
-// } else if (adminPages.includes(window.location.href.split('/')[-1])) {
-//   role = 'admin';
-// } else if (superAdminPages.includes(window.location.href.split('/')[-1])) {
-//   role = 'superadmin';
-// }
-
 const homeAnchor = document.querySelector('#home');
 
 function redirectBreadcrumb(role) {
@@ -23,6 +10,15 @@ function redirectBreadcrumb(role) {
     window.location.href = '/client/pages/home-admin.html';
   } else if (role === 'superadmin') {
     window.location.href = '/client/pages/home-sa.html';
+  }
+}
+
+function handleAuthentication(permissions) {
+  const urlParts = window.location.href.split('/');
+  const requestedPage = urlParts[urlParts.length - 1].split('.')[0];
+
+  if (!permissions.includes(requestedPage)) {
+    window.location.href = '/client/pages/unauthorised.html';
   }
 }
 
@@ -39,8 +35,8 @@ if (cookies) {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        console.log(homeAnchor);
+        handleAuthentication(data.permissions);
+
         homeAnchor.addEventListener('click', () => {
           redirectBreadcrumb(data.role);
         });

@@ -41,6 +41,7 @@ export class AuthController {
       sub: user.employee_id,
       email: user.email,
       role: user.Role.role_name,
+      permissions: user.Role.permissions,
     });
 
     res.cookie('accessToken', token, {
@@ -83,5 +84,10 @@ export class AuthController {
         performance: null,
       };
     }
+  }
+
+  @Get('/find/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.service.findUserByEmail(email);
   }
 }
