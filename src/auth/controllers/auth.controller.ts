@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
 import { LoginDto } from "../dto's/auth.dto";
 
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private service: AuthService) {}
 
@@ -51,19 +51,19 @@ export class AuthController {
     });
 
     if (user.Role.role_name === 'superadmin') {
-      res.redirect('/client/pages/home-sa.html');
+      res.redirect('/public/pages/home-sa.html');
     } else if (user.Role.role_name === 'admin') {
-      res.redirect('/client/pages/home-admin.html');
+      res.redirect('/public/pages/home-admin.html');
     } else {
-      res.redirect('/client/pages/home-user.html');
+      res.redirect('/public/pages/home-user.html');
     }
 
     // For serving files to front-end that is de-coupled
-    // res.redirect('http://localhost:5500/client/pages/home-sa.html');
+    // res.redirect('http://localhost:5500/public/pages/home-sa.html');
   }
 
   @Post('create')
-  @Redirect('/client/pages/home-sa.html')
+  @Redirect('/public/pages/home-sa.html')
   createUserController(@Body() userDetails: LoginDto) {
     try {
       this.service.createUser(userDetails);

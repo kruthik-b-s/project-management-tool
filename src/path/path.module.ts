@@ -7,8 +7,8 @@ import { resolve } from 'path';
     ServeStaticModule.forRoot(
       (() => {
         return {
-          rootPath: resolve('./client'),
-          serveRoot: '/client',
+          rootPath: resolve('./public'),
+          serveRoot: '/public',
         };
       })(),
     ),

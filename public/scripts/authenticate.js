@@ -5,11 +5,11 @@ const homeAnchor = document.querySelector('#home');
 
 function redirectBreadcrumb(role) {
   if (role === 'user') {
-    window.location.href = '/client/pages/home-user.html';
+    window.location.href = '/public/pages/home-user.html';
   } else if (role === 'admin') {
-    window.location.href = '/client/pages/home-admin.html';
+    window.location.href = '/public/pages/home-admin.html';
   } else if (role === 'superadmin') {
-    window.location.href = '/client/pages/home-sa.html';
+    window.location.href = '/public/pages/home-sa.html';
   }
 }
 
@@ -18,7 +18,7 @@ function handleAuthentication(permissions) {
   const requestedPage = urlParts[urlParts.length - 1].split('.')[0];
 
   if (!permissions.includes(requestedPage)) {
-    window.location.href = '/client/pages/unauthorised.html';
+    window.location.href = '/public/pages/unauthorised.html';
   }
 }
 
