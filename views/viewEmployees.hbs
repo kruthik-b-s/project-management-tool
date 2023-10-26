@@ -26,7 +26,7 @@
             {{#each employees}}
             <tr>
                 <th>{{this.employee_id}}</th>
-                <td><a href="#">{{this.employee_name}}</a></td>
+                <td><a href="/api/employee/getEmployee/{{this.employee_id}}">{{this.employee_name}}</a></td>
                 <td>{{this.department}}</td>
                 <td><a href="#">{{this.performance}}</a></td>
             </tr>

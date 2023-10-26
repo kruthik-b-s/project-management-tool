@@ -6,7 +6,6 @@ export class ProjectService {
   constructor(private prisma: PrismaService) {}
 
   async getAllProjects() {
-    const projects = await this.prisma.project.findMany();
-    return projects;
+    return await this.prisma.project.findMany();
   }
 }

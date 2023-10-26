@@ -6,9 +6,12 @@ export class EmployeeController {
   constructor(private service: EmployeeService) {}
 
   @Get('getEmployee/:id')
-  getEmployeeDetailsByIdController(@Param('id') id: string) {
+  @Render('employeeDetails')
+  async getEmployeeDetailsByIdController(@Param('id') id: string) {
     try {
-      return this.service.getEmployeeDetailsById(parseInt(id));
+      return {
+        employee: await this.service.getEmployeeDetailsById(parseInt(id)),
+      };
     } catch (error) {
       return {
         employee_id: null,

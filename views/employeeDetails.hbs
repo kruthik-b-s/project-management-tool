@@ -18,33 +18,38 @@
             <fieldset disabled>
                 <div class="col-md-12" id="input">
                     <label for="inputId" class="form-label">Employee ID</label>
-                    <input type="number" class="form-control" id="inputId" name="employee_id" />
+                    <input type="number" class="form-control" id="inputId" name="employee_id"
+                        value="{{employee.employee_id}}" />
                 </div>
 
                 <div class="col-md-12" id="input">
                     <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" name="email" />
+                    <input type="email" class="form-control" id="inputEmail" name="email" value="{{employee.email}}" />
                 </div>
             </fieldset>
             <div class="col-md-12" id="input">
                 <label for="inputName" class="form-label">Name</label>
-                <input type="text" class="form-control" id="inputName" name="employee_name" />
+                <input type="text" class="form-control" id="inputName" name="employee_name"
+                    value="{{employee.employee_name}}" />
             </div>
 
             <div class="col-md-12" id="input">
                 <label for="inputDepartment" class="form-label">Department</label>
-                <input type="text" class="form-control" id="inputDepartment" name="department" />
+                <input type="text" class="form-control" id="inputDepartment" name="department"
+                    value="{{employee.department}}" />
             </div>
 
             <div class="col-md-12" id="input">
                 <label for="inputPhone" class="form-label">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhone" name="phone_number" />
+                <input type="number" class="form-control" id="inputPhone" name="phone_number"
+                    value="{{employee.phone_number}}" />
             </div>
 
             <div class="role-reporting">
                 <div class="col-md-5" id="input">
                     <label for="inputRole" class="form-label">Role</label>
                     <select id="inputRole" class="form-select" name="role">
+                        <option>{{employee.Role.role_name}}</option>
                         <option>user</option>
                         <option>admin</option>
                         <option>superadmin</option>
@@ -53,7 +58,8 @@
 
                 <div class="col-md-5" id="input">
                     <label for="inputReporting" class="form-label">Reporting to</label>
-                    <input type="number" class="form-control" id="inputReporting" name="reporting_to" />
+                    <input type="number" class="form-control" id="inputReporting" name="reporting_to"
+                        value="{{employee.reporting_to_employee_id}}" />
                 </div>
             </div>
 
@@ -73,3 +79,4 @@
 </div>
 
 <script src="/scripts/breadcrumb-nav.js"></script>
+<script src="/scripts/employee-details.js"></script>

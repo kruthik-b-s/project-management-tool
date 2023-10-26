@@ -16,7 +16,7 @@
         </div>
         <div>
             <select name="filter" id="table-filter">
-                <option value="on-going" selected>on-going</option>
+                <option value="on-going">on-going</option>
                 <option value="completed">completed</option>
                 <option value="all">all</option>
             </select>
@@ -36,7 +36,7 @@
                     <th scope="col">Other Details</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody onload="firstFilter()" id="table-body">
                 {{#each projects}}
                 <tr>
                     <th>{{this.project_id}}</th>
@@ -54,3 +54,4 @@
 </div>
 
 <script src="/scripts/breadcrumb-nav.js"></script>
+<script src="/scripts/view-projects.js"></script>
