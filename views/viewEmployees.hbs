@@ -1,0 +1,41 @@
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" id="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <button id="home" class="btn btn-link">Home</button>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            View Employees
+        </li>
+    </ol>
+</nav>
+
+<div class="employee-table">
+    <div class="title">
+        <p>Employees list</p>
+    </div>
+    <table class="table table-bordered" id="paged-table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Performance (Out of 5)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each employees}}
+            <tr>
+                <th>{{this.employee_id}}</th>
+                <td><a href="#">{{this.employee_name}}</a></td>
+                <td>{{this.department}}</td>
+                <td><a href="#">{{this.performance}}</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div aria-label="Page navigation example">
+        <ul></ul>
+    </div>
+</div>
+
+<script src="/scripts/breadcrumb-nav.js"></script>

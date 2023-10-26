@@ -1,0 +1,56 @@
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" id="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <button id="home" class="btn btn-link">Home</button>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            View Projects
+        </li>
+    </ol>
+</nav>
+
+<div class="projects-table">
+    <div class="top-bar">
+        <div class="title">
+            <p>Projects</p>
+        </div>
+        <div>
+            <select name="filter" id="table-filter">
+                <option value="on-going" selected>on-going</option>
+                <option value="completed">completed</option>
+                <option value="all">all</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="scrollable">
+        <table class="table table-bordered" id="projects">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Other Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each projects}}
+                <tr>
+                    <th>{{this.project_id}}</th>
+                    <td>{{this.project_name}}</td>
+                    <td>{{this.client}}</td>
+                    <td>{{this.start_date}}</td>
+                    <td>{{this.end_date}}</td>
+                    <td>{{this.status}}</td>
+                    <td><a href="#">click here</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="/scripts/breadcrumb-nav.js"></script>

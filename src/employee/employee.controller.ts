@@ -1,11 +1,11 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 
 @Controller('api/employee')
 export class EmployeeController {
   constructor(private service: EmployeeService) {}
 
-  @Get('/:id')
+  @Get('getEmployee/:id')
   getEmployeeDetailsByIdController(@Param('id') id: string) {
     try {
       return this.service.getEmployeeDetailsById(parseInt(id));
@@ -23,5 +23,12 @@ export class EmployeeController {
         projects: [],
       };
     }
+  }
+
+  @Get('viewAllEmployees')
+  @Render('viewEmployees')
+  async getAllEmployeeDetails() {
+    const employees = await this.service.getAllEmployeeDetails();
+    return { employees: employees };
   }
 }

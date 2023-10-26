@@ -38,4 +38,18 @@ export class EmployeeService {
       };
     }
   }
+
+  async getAllEmployeeDetails() {
+    const employees = await this.prisma.employee.findMany({
+      include: {
+        performance: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+    });
+
+    return employees;
+  }
 }
