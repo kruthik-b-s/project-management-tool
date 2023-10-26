@@ -11,13 +11,12 @@
 }
 
 .projects-table {
+  width: 100vw;
+  height: 100vh;
+  padding: 120px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 120px;
-  left: 270px;
+  z-index: -1;
 }
 
 .top-bar {
@@ -28,13 +27,13 @@
 }
 
 #projects {
-  width: 1000px;
+  width: 100%;
   max-height: 700px;
 }
 
 .scrollable {
-  width: 1000px;
-  height: 500px;
+  /* width: 1000px;
+  height: 500px; */
   overflow-y: scroll;
 }
 

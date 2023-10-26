@@ -129,7 +129,7 @@ export class AuthService {
         expiresIn: '1h',
       });
     } catch (error) {
-      return { message: 'Failed to generate token', error: error.message };
+      throw new Error(error.message);
     }
   }
 

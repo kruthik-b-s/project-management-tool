@@ -29,9 +29,9 @@ form {
 }
 
 .projects-title p {
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-  margin-top: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2px;
 }
 
 .projects {
