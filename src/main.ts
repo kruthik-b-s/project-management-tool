@@ -19,6 +19,16 @@ async function bootstrap() {
       defaultLayout: 'index',
       layoutsDir: 'views/layouts',
       partialsDir: 'views/partials',
+      helpers: {
+        ratings: (ratingArr: Array<{ rating: number }>) => {
+          let ratings = 0;
+          for (const rating of ratingArr) {
+            ratings += rating.rating;
+          }
+          if (ratingArr.length > 0) return ratings / ratingArr.length;
+          else return;
+        },
+      },
     }),
   );
   app.setViewEngine('hbs');
