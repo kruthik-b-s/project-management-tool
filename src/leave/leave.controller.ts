@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
 import { LeavesService } from './leave.service';
 
 @Controller('api/leaves')
@@ -10,8 +10,18 @@ export class LeavesController {
         @Render('leaveRequests')
         async getAllLeaveDetails() {
           const leaves = await this.service.getAllLeaves();
-          console.log("-------->>> ",leaves)
+        //   console.log("-------->>> ",leaves)
           return { leaves : leaves };
         }
+
+
+        @Get('statusUpdate')
+        @Redirect('viewAllLeaves')
+        async UpdateLeaveStatus(@Query('id') id:number , @Query('status') updatedStatus: string,){
+            // console.log("id---->>",id)
+            // console.log("status---->>",updatedStatus)
+            this.service.UpdateStatus(id,updatedStatus);
+        }
+
       }
       

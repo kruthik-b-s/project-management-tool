@@ -22,9 +22,10 @@
                 <label for="inputComments" class="form-label">Comments</label>
                 <textarea id="inputComments" class="form-control" rows="1"></textarea>
             </div>
-            {{(eq this.status "pending")}}
-            <a href="#" class="btn btn-primary">Approve</a>
-            <a href="#" class="btn btn-primary">Reject</a>
+            {{!-- {{#if (eq (this.status) "pending")}} --}}
+            <a href="/api/leaves/statusUpdate?status=Approved&id={{this.leave_application_employee_id}}" class="btn btn-primary">Approve</a>
+            <a href="/api/leaves/statusUpdate?status=Rejected&id={{this.leave_application_employee_id}}" class="btn btn-primary">Reject</a>
+             {{!-- {{/if}} --}}
         </div>
     </div>
 
