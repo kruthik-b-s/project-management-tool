@@ -10,7 +10,8 @@ export class LeavesController {
         @Render('leaveRequests')
         async getAllLeaveDetails() {
           const leaves = await this.service.getAllLeaves();
-          return { leaves: leaves };
+          console.log("-------->>> ",leaves)
+          return { leaves : leaves };
         }
       }
       

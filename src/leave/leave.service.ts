@@ -7,7 +7,6 @@ export class LeavesService {
 
     async getAllLeaves() {
         const leaves = await this.prisma.leaveApplication.findMany({});
-    
         return leaves;
       }
 }
