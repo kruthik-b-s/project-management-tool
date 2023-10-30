@@ -9,7 +9,7 @@ import { AppController } from './app.controller';
 import { ProjectModule } from './project/project.module';
 import { ProjectController } from './project/project.controller';
 import { ProjectService } from './project/project.service';
-import { LeavesModule } from './leave/leave.module';
+import { LeavesModule } from './leaves/leave.module';
 
 @Module({
   imports: [

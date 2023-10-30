@@ -1,6 +1,10 @@
 import { Body, Controller, Get, Param, Post, Put, Query, Redirect, Render } from '@nestjs/common';
 import { LeavesService } from './leave.service';
-
+interface StatusUpdate{
+  id:number;
+  status:string;
+  comments:string;
+}
 @Controller('api/leaves')
 export class LeavesController {
 
@@ -15,15 +19,17 @@ export class LeavesController {
         }
 
 
-        @Get('statusUpdate')
+        @Post('statusUpdate')
         @Redirect('viewAllLeaves')
-        async UpdateLeaveStatus(@Query('id') id:number , @Query('status') updatedStatus: string){
+        async UpdateLeaveStatus(@Body() newStatus: StatusUpdate){
             // console.log("id---->>",id)
             // console.log("status---->>",updatedStatus)
-           const leaveStatus = await this.service.UpdateStatus(id,updatedStatus);
-            console.log(leaveStatus)
-          
+      
+            this.service.UpdateStatus(newStatus.id,newStatus.status,newStatus.comments);
+
         }
+
+
 
       }
       

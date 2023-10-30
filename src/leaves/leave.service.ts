@@ -10,15 +10,17 @@ export class LeavesService {
         return leaves;
       }
 
-     async UpdateStatus(id,updatedStatus){
+      async UpdateStatus(id, updatedStatus, newComments){
         id = parseInt(id);
         const updatedLeaveStatus = await this.prisma.leaveApplication.update({
             where: { leave_application_id : id },
             data: {
               status: updatedStatus,
+              comments:newComments
             },
           });
         return updatedLeaveStatus;
       }
+
 
 }
