@@ -23,5 +23,11 @@ export class LeavesController {
             this.service.UpdateStatus(id,updatedStatus);
         }
 
+        @Post('applyLeave')
+        async applyLeaveForm(){
+          // console.log("id---->>",id)
+          // console.log("status---->>",updatedStatus)
+          this.service.applyLeave();
+      }
       }
       
