@@ -8,7 +8,12 @@
         </li>
     </ol>
 </nav>
-
+<div class="heading-leaves">
+    <h3>
+        Pending Requests
+    </h3>
+    
+</div>
 <div class="leave-requests">    
   {{#each leaves}}
        <div class="card w-75 mb-3" id="leave-card">
@@ -17,17 +22,17 @@
             <div class="card-text">{{this.reason}}</div>
             <div class="card-from_date">from_date:{{this.from_date}}</div>
             <div class="card-till_date">till_date:{{this.till_date}}</div>
-            <div class="card-status">Status:{{this.status}}</div>
+            <div class="card-status" id="status-{{this.leave_application_id}}">Status:{{this.status}}</div>
             <div class="mb-3">
                 <label for="comm-{{this.leave_application_id}}" class="form-label">Comments</label>
-                <textarea id="comm-{{this.leave_application_id}}" class="form-control" rows="1"></textarea>
+                <textarea id="comm-{{this.leave_application_id}}" onkeyup=rejectDisable({{this.leave_application_id}}) class="form-control" rows="1"></textarea>
             </div>
             {{!-- {{#if (eq (this.status) "pending")}} --}}
             {{!-- <a href="/api/leaves/statusUpdate?status=Approved&id={{this.leave_application_id}}" class="btn btn-primary">Approve</a>
             <a href="/api/leaves/statusUpdate?status=Rejected&id={{this.leave_application_id}}" class="btn btn-primary">Reject</a> --}}
              {{!-- {{/if}} --}}
-              <button class="btn btn-primary accept-button" onclick=updateStatus({{this.leave_application_id}},"approve")>Approve</button>
-             <button  class="btn btn-primary reject-button" onclick=updateStatus({{this.leave_application_id}},"reject")>Reject</button>
+              <button id="accept-{{this.leave_application_id}}" class="btn btn-primary accept-button" onclick=updateStatus({{this.leave_application_id}},"approve")>Approve</button>
+             <button id="reject-{{this.leave_application_id}}"  class="btn btn-primary reject-button" onclick=updateStatus({{this.leave_application_id}},"reject") disabled>Reject</button>
         </div>
     </div>
 

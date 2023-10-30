@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post, Put, Query, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Post,Redirect, Render, Res } from '@nestjs/common';
 import { LeavesService } from './leave.service';
+import { Request, Response } from 'express';
 interface StatusUpdate{
   id:number;
   status:string;
@@ -12,21 +13,23 @@ export class LeavesController {
 
         @Get('viewAllLeaves')
         @Render('leaveRequests')
-        async getAllLeaveDetails() {
+        async getAllLeaveDetails(@Res() res:Response) {
           const leaves = await this.service.getAllLeaves();
           // console.log("-------->>> ",leaves)
+          if(leaves.length == 0){
+            res.send( "<h1>No Leave Approval Pending</h1>")
+          }
           return { leaves : leaves };
         }
 
 
         @Post('statusUpdate')
-        @Redirect('viewAllLeaves')
-        async UpdateLeaveStatus(@Body() newStatus: StatusUpdate){
+        // @Redirect('viewAllLeaves')
+        async UpdateLeaveStatus(@Body() newStatus: StatusUpdate,@Res() res: Response){
             // console.log("id---->>",id)
             // console.log("status---->>",updatedStatus)
-      
-            this.service.UpdateStatus(newStatus.id,newStatus.status,newStatus.comments);
-
+            await this.service.UpdateStatus(newStatus.id,newStatus.status,newStatus.comments);
+            res.redirect('viewAllLeaves');
         }
 
 

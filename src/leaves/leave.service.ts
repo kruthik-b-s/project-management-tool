@@ -6,7 +6,10 @@ export class LeavesService {
     constructor(private prisma: PrismaService) {}
 
     async getAllLeaves() {
-        const leaves = await this.prisma.leaveApplication.findMany({});
+        const leaves = await this.prisma.leaveApplication.findMany({
+          where: {
+          status: 'pending',
+        },});
         return leaves;
       }
 
