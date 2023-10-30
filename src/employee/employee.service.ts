@@ -52,6 +52,11 @@ export class EmployeeService {
             rating: true,
           },
         },
+        projects: {
+          select: {
+            project_name: true,
+          },
+        },
       },
       take: perPageData,
       skip: skip,
@@ -63,5 +68,30 @@ export class EmployeeService {
       employees: employees,
       totalPages: Math.ceil(employeeCount / perPageData),
     };
+  }
+
+  async getEmployeePerformanceHistory(pageDetails: {
+    emp_id: string;
+    page: string;
+    perPage: string;
+  }) {
+    const { page, perPage } = pageDetails;
+    const pageNumber = parseInt(page);
+    const perPageData = parseInt(perPage);
+    const skip = (pageNumber - 1) * perPageData;
+
+    const employee_id = parseInt(pageDetails.emp_id);
+
+    const performanceDetails = await this.prisma.performance.findMany({
+      where: {
+        Employee: {
+          employee_id: employee_id,
+        },
+      },
+      take: perPageData,
+      skip: skip,
+    });
+
+    return performanceDetails;
   }
 }

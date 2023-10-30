@@ -1,0 +1,55 @@
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" id="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <button id="home" class="btn btn-link">Home</button>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="/api/employee/viewAllEmployees?page=1&perPage=8">View Employees</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Performance History
+        </li>
+    </ol>
+</nav>
+
+<div class="projects-table">
+    <div class="top-bar">
+        <div class="title">
+            <p>{{employee.employee_name}} - {{employee.employee_id}}</p>
+        </div>
+        <div>
+            <select name="filter" id="table-filter">
+                <option value="three-months">Last 3 months</option>
+                <option value="six-months">Last 6 months</option>
+                <option value="year" selected>Last year</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="scrollable">
+        <table class="table table-bordered" id="projects">
+            <thead>
+                <tr>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Comments</th>
+                    <th scope="col">Given by</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                {{#each performanceHistory}}
+                <tr>
+                    <th>{{this.rating}}</th>
+                    <td>{{this.comments}}</td>
+                    <td>{{this.given_by_employee_id}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination" id="pages">{{projects.totalPages}}</ul>
+    </nav>
+</div>
+
+<script src="/scripts/breadcrumb-nav.js"></script>

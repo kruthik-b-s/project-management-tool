@@ -37,6 +37,8 @@ model Performance {
   rating                  Int
   comments                String
   given_by_employee_id    Int
+  for_month               Int
+  for_year                Int
   Employee                Employee? @relation(fields: [performance_employee_id], references: [employee_id])
   performance_employee_id Int?
 }
@@ -45,8 +47,8 @@ model Project {
   project_id      Int            @id @default(autoincrement())
   project_name    String         @unique
   client          String
-  start_date      DateTime
-  end_date        DateTime
+  start_date      DateTime       @db.Date
+  end_date        DateTime       @db.Date
   status          String
   employees       Employee[]
   project_details ProjectDetail?

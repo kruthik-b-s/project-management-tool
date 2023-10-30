@@ -6,6 +6,7 @@ CREATE TABLE "Employee" (
     "email" TEXT NOT NULL,
     "phone_number" TEXT,
     "employee_role_id" INTEGER NOT NULL,
+    "reporting_to_employee_id" INTEGER,
 
     CONSTRAINT "Employee_pkey" PRIMARY KEY ("employee_id")
 );
@@ -25,6 +26,8 @@ CREATE TABLE "Performance" (
     "rating" INTEGER NOT NULL,
     "comments" TEXT NOT NULL,
     "given_by_employee_id" INTEGER NOT NULL,
+    "for_month" INTEGER NOT NULL,
+    "for_year" INTEGER NOT NULL,
     "performance_employee_id" INTEGER,
 
     CONSTRAINT "Performance_pkey" PRIMARY KEY ("performance_id")
@@ -35,8 +38,9 @@ CREATE TABLE "Project" (
     "project_id" SERIAL NOT NULL,
     "project_name" TEXT NOT NULL,
     "client" TEXT NOT NULL,
-    "start_date" TIMESTAMP(3) NOT NULL,
-    "end_date" TIMESTAMP(3) NOT NULL,
+    "start_date" DATE NOT NULL,
+    "end_date" DATE NOT NULL,
+    "status" TEXT NOT NULL,
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("project_id")
 );
@@ -73,7 +77,7 @@ CREATE TABLE "LeaveApplication" (
     "reason" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "comments" TEXT NOT NULL,
-    "employeeEmployee_id" INTEGER,
+    "leave_application_employee_id" INTEGER,
 
     CONSTRAINT "LeaveApplication_pkey" PRIMARY KEY ("leave_application_id")
 );
@@ -121,7 +125,7 @@ ALTER TABLE "ProjectDetail" ADD CONSTRAINT "ProjectDetail_project_details_id_fke
 ALTER TABLE "Leave" ADD CONSTRAINT "Leave_employee_leave_id_fkey" FOREIGN KEY ("employee_leave_id") REFERENCES "Employee"("employee_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LeaveApplication" ADD CONSTRAINT "LeaveApplication_employeeEmployee_id_fkey" FOREIGN KEY ("employeeEmployee_id") REFERENCES "Employee"("employee_id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "LeaveApplication" ADD CONSTRAINT "LeaveApplication_leave_application_employee_id_fkey" FOREIGN KEY ("leave_application_employee_id") REFERENCES "Employee"("employee_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_EmployeeToProject" ADD CONSTRAINT "_EmployeeToProject_A_fkey" FOREIGN KEY ("A") REFERENCES "Employee"("employee_id") ON DELETE CASCADE ON UPDATE CASCADE;

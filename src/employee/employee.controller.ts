@@ -36,4 +36,22 @@ export class EmployeeController {
     const employees = await this.service.getAllEmployeeDetails(pageDetails);
     return { employees };
   }
+
+  @Get('employeePerformanceHistory')
+  @Render('employeePerformance')
+  async getEmployeePerformanceHistory(
+    @Query() pageDetails: { emp_id: string; page: string; perPage: string },
+  ) {
+    const performanceHistory =
+      await this.service.getEmployeePerformanceHistory(pageDetails);
+
+    const employeeDetails = await this.service.getEmployeeDetailsById(
+      parseInt(pageDetails.emp_id),
+    );
+
+    return {
+      performanceHistory: performanceHistory,
+      employee: employeeDetails,
+    };
+  }
 }
