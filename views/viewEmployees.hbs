@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#each employees}}
+            {{#each employees.employees}}
             <tr>
                 <th>{{this.employee_id}}</th>
                 <td><a href="/api/employee/getEmployee/{{this.employee_id}}">{{this.employee_name}}</a></td>
@@ -35,8 +35,9 @@
     </table>
 
     <nav aria-label="Page navigation">
-        <ul class="pagination" id="pages">{{projects.totalPages}}</ul>
+        <ul class="pagination" id="pages">{{employees.totalPages}}</ul>
     </nav>
 </div>
 
 <script src="/scripts/breadcrumb-nav.js"></script>
+<script src="/scripts/view-employees.js"></script>

@@ -39,7 +39,12 @@ export class EmployeeService {
     }
   }
 
-  async getAllEmployeeDetails() {
+  async getAllEmployeeDetails(pageDetails: { page: string; perPage: string }) {
+    const { page, perPage } = pageDetails;
+    const pageNumber = parseInt(page);
+    const perPageData = parseInt(perPage);
+    const skip = (pageNumber - 1) * perPageData;
+
     const employees = await this.prisma.employee.findMany({
       include: {
         performance: {
@@ -48,8 +53,15 @@ export class EmployeeService {
           },
         },
       },
+      take: perPageData,
+      skip: skip,
     });
 
-    return employees;
+    const employeeCount = await this.prisma.employee.count();
+
+    return {
+      employees: employees,
+      totalPages: Math.ceil(employeeCount / perPageData),
+    };
   }
 }

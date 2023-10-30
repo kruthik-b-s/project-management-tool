@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Render } from '@nestjs/common';
+import { Controller, Get, Param, Query, Render } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 
 @Controller('api/employee')
@@ -30,8 +30,10 @@ export class EmployeeController {
 
   @Get('viewAllEmployees')
   @Render('viewEmployees')
-  async getAllEmployeeDetails() {
-    const employees = await this.service.getAllEmployeeDetails();
-    return { employees: employees };
+  async getAllEmployeeDetails(
+    @Query() pageDetails: { page: string; perPage: string },
+  ) {
+    const employees = await this.service.getAllEmployeeDetails(pageDetails);
+    return { employees };
   }
 }
