@@ -64,21 +64,35 @@ export class LeavesService {
   }
 
   async createLeave(leaveDetails: LeaveDto) {
-    // try {
-    //   let user = await this.prisma.leaveApplication.create({
-    //     data: {
-    //       leave_application_employee_id:
-    //         leaveDetails.leave_application_employee_id,
-    //       leave_type: leaveDetails.leave_type,
-    //       from_date: leaveDetails.from_date,
-    //       till_date: leaveDetails.till_date,
-    //       reason: leaveDetails.reason,
-    //     },
-    //   });
+    try {
+      const id = +leaveDetails.leave_application_employee_id
+      const t_date =  new Date(leaveDetails.till_date).toISOString()
+      const f_date = new Date(leaveDetails.from_date).toISOString()
+      let user = await this.prisma.leaveApplication.create({
+        data: {
+          leave_application_employee_id:id,
+          leave_type: leaveDetails.leave_type,
+          from_date: f_date,
+          till_date: t_date,
+          reason: leaveDetails.reason,
+        },
+      });      return { message: 'Leave applied sucessfully' };
+    } catch (error) {
+      return { message: 'Failed to apply leave', error: error.message };
+    }
+  }
 
-    //   return { message: 'Leave applied sucessfully' };
-    // } catch (error) {
-    //   return { message: 'Failed to apply leave', error: error.message };
-    // }
+  async getLeavetype(){
+    const id = 1;
+     return await this.prisma.leave.findUnique({
+      where: {
+        employee_leave_id: id,
+      },
+      select: {
+        casual_leaves: true,
+        sick_leaves:true,
+        floater_leaves:true,
+      },
+    });
   }
 }

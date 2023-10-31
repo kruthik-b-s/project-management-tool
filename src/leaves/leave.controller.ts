@@ -8,9 +8,8 @@ import {
   Res,
 } from '@nestjs/common';
 import { LeavesService } from './leave.service';
-import {  Response } from 'express';
+import { Response } from 'express';
 import { LeaveDto } from './dto/leave.dto';
-
 
 @Controller('api/leaves')
 export class LeavesController {
@@ -20,7 +19,7 @@ export class LeavesController {
   @Render('leaveRequests')
   async getAllLeaveDetails(@Res() res: Response) {
     const leaves = await this.service.getAllLeaves();
-    console.log("-------->>> ",leaves)
+    console.log('-------->>> ', leaves);
     if (leaves.length == 0) {
       res.send('<h1>No Leave Approval Pending</h1>');
     }
@@ -53,8 +52,9 @@ export class LeavesController {
     return { leaves: leaves };
   }
 
-  @Post('applyLeaveform')
-  // @Redirect('/pages/home-sa.html')
+  @Post('createLeaveform')
+  @Redirect('/pages/home-user.html')
+  // route possible for admin too
   createLeave(@Body() leaveDetails: LeaveDto) {
     try {
       this.service.createLeave(leaveDetails);
@@ -62,4 +62,11 @@ export class LeavesController {
       throw new Error(error.message);
     }
   }
+
+  @Get('getleaveType')
+  //pass in id 
+  async getLeavetype() {
+    return await this.service.getLeavetype();
+  }
+
 }
