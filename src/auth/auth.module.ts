@@ -15,6 +15,7 @@ import { JwtAuthGuard } from './guards/jwt.guard';
     GoogleStrategy,
     PrismaService,
     SessionSerializer,
+    String,
   ],
   controllers: [AuthController],
 })

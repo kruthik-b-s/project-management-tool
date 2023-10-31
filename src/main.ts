@@ -37,11 +37,16 @@ async function bootstrap() {
           }>,
         ) => {
           const projects = [];
-          for (const project of projectsArr) {
-            projects.push(project.project_name);
-          }
 
-          return projects.join(', ');
+          if (projectsArr.length > 0) {
+            for (const project of projectsArr) {
+              projects.push(project.project_name);
+            }
+
+            return projects.join(', ');
+          } else {
+            return 'stand-by/benched';
+          }
         },
       },
     }),

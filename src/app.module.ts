@@ -9,6 +9,7 @@ import { AppController } from './app.controller';
 import { ProjectModule } from './project/project.module';
 import { ProjectController } from './project/project.controller';
 import { ProjectService } from './project/project.service';
+import { EmployeePerformanceModule } from './employee-performance/employee-performance.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProjectService } from './project/project.service';
     PathModule,
     EmployeeModule,
     ProjectModule,
+    EmployeePerformanceModule,
   ],
   controllers: [AppController, ProjectController],
   providers: [ProjectService],

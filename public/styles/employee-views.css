@@ -9,6 +9,10 @@
   padding: 0px;
 }
 
+#sucess {
+  z-index: 100;
+}
+
 .employee-table {
   width: 100vw;
   height: 100vh;

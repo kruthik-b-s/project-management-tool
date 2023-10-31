@@ -12,16 +12,17 @@
     </ol>
 </nav>
 
-<div class="projects-table">
+<div class="employee-table">
     <div class="top-bar">
         <div class="title">
             <p>{{employee.employee_name}} - {{employee.employee_id}}</p>
         </div>
         <div>
             <select name="filter" id="table-filter">
+                <option value="none" selected>Choose...</option>
                 <option value="three-months">Last 3 months</option>
                 <option value="six-months">Last 6 months</option>
-                <option value="year" selected>Last year</option>
+                <option value="year">Last year</option>
             </select>
         </div>
     </div>
@@ -33,14 +34,16 @@
                     <th scope="col">Rating</th>
                     <th scope="col">Comments</th>
                     <th scope="col">Given by</th>
+                    <th scope="col">Month</th>
                 </tr>
             </thead>
             <tbody id="table-body">
-                {{#each performanceHistory}}
+                {{#each performanceHistory.performanceDetails}}
                 <tr>
                     <th>{{this.rating}}</th>
                     <td>{{this.comments}}</td>
                     <td>{{this.given_by_employee_id}}</td>
+                    <td>{{this.for_month}}</td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -48,8 +51,9 @@
     </div>
 
     <nav aria-label="Page navigation">
-        <ul class="pagination" id="pages">{{projects.totalPages}}</ul>
+        <ul class="pagination" id="pages">{{performanceHistory.totalPages}}</ul>
     </nav>
 </div>
 
 <script src="/scripts/breadcrumb-nav.js"></script>
+<script src="/scripts/view-employees.js"></script>

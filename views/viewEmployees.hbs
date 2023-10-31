@@ -33,39 +33,39 @@
                 <td>
                     <div class="rating-cell">
                         <span>{{ratings this.performance}}</span>
-                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-bs-whatever="@mdo">Add</button>
+                        <button type="button" class="btn btn-link" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{this.employee_id}}" data-bs-whatever="@mdo">Add</button>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade" id="exampleModal{{this.employee_id}}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel{{this.employee_id}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add rating</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel{{this.employee_id}}">Add
+                                            rating to {{this.employee_name}}</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
+                                        <form action="/api/employee-performance/addRating?emp_id={{this.employee_id}}"
+                                            method="post">
                                             <div class="mb-3">
                                                 <label for="rating" class="col-form-label">Rating</label>
-                                                <input max="5" type="number" class="form-control" id="rating">
+                                                <input max="5" type="number" class="form-control" id="rating"
+                                                    name="rating">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="comments" class="col-form-label">Comments</label>
-                                                <textarea class="form-control" id="comments"></textarea>
+                                                <textarea class="form-control" id="comments" name="comments"></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="month-year" class="col-form-label">Rating for month</label>
-                                                <input type="month" class="form-control" id="month-year">
+                                                <input type="month" class="form-control" id="month-year"
+                                                    name="monthYear">
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <form action="#">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -74,7 +74,9 @@
                     </div>
                 </td>
                 <td>{{projDisplay this.projects}}</td>
-                <td><a href="/api/employee/employeePerformanceHistory?emp_id={{this.employee_id}}&page=1&perPage=10">View Performance history</a></td>
+                <td><a
+                        href="/api/employee-performance/employeePerformanceHistory?emp_id={{this.employee_id}}&page=1&perPage=10">View
+                        Performance history</a></td>
             </tr>
             {{/each}}
         </tbody>
