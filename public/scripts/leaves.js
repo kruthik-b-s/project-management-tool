@@ -8,6 +8,18 @@ const rejectDisable = (id)=>{
   }
 }
 
+window.onload = ()=>{
+
+  const toggle = document.querySelector('#toggle')
+  if(window.location.pathname === "/api/leaves/viewAllLeaves"){
+    toggle.pathname = "/api/leaves/nonPendingLeaves"
+    toggle.innerText = "Non Pending Leaves"
+  }
+  else{
+    toggle.pathname = "/api/leaves/viewAllLeaves"
+    toggle.innerText = "Pending Leaves"
+  }
+}
 
 const updateStatus =(id,decision)=>{
     const acceptBtn = document.querySelector(`#accept-${id}`)
@@ -18,6 +30,11 @@ const updateStatus =(id,decision)=>{
     acceptBtn.disabled = true
     rejectBtn.disabled = true
     statusText.textContent = `Status:${decision}`
+  console.log(decision)
+
+    if(decision=="approve" && commentBox.value.trim('').length == 0){
+      commentBox.value = "approved";
+    }
     
     const data = {
         id : id,

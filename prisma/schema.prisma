@@ -77,8 +77,8 @@ model LeaveApplication {
   from_date                     DateTime
   till_date                     DateTime
   reason                        String
-  status                        String
-  comments                      String
+  status                        String   @default("pending")
+  comments                      String? 
   Employee                      Employee? @relation(fields: [leave_application_employee_id], references: [employee_id])
   leave_application_employee_id Int?
 }
