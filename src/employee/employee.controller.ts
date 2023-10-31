@@ -38,7 +38,7 @@ export class EmployeeController {
   }
 
   @Get('employeePerformanceHistory')
-  @Render('employeePerformance')
+  // @Render('employeePerformance')
   async getEmployeePerformanceHistory(
     @Query() pageDetails: { emp_id: string; page: string; perPage: string },
   ) {

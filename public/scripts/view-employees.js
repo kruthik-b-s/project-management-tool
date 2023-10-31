@@ -14,7 +14,7 @@ let currentPage = getCurrentPage();
 function createPages(totalPages) {
   paginationPages.innerHTML += `<li class="page-item disabled" id="previous-button"><a class="page-link" href="/api/employee/viewAllEmployees?page=${
     currentPage - 1
-  }&perPage=5">Previous</a></li>`;
+  }&perPage=8">Previous</a></li>`;
 
   for (let i = 1; i <= totalPages; i++) {
     const listElement = document.createElement('li');
@@ -22,7 +22,7 @@ function createPages(totalPages) {
 
     const listLink = document.createElement('a');
     listLink.className = 'page-link';
-    listLink.href = `/api/employee/viewAllEmployees?page=${i}&perPage=5`;
+    listLink.href = `/api/employee/viewAllEmployees?page=${i}&perPage=8`;
     listLink.textContent = i;
 
     listElement.appendChild(listLink);
@@ -30,7 +30,7 @@ function createPages(totalPages) {
   }
 
   const nextPage = parseInt(currentPage) + 1;
-  paginationPages.innerHTML += `<li class="page-item disabled" id="next-button"><a class="page-link" href="/api/employee/viewAllEmployees?page=${nextPage}&perPage=5">Next</a></li>`;
+  paginationPages.innerHTML += `<li class="page-item disabled" id="next-button"><a class="page-link" href="/api/employee/viewAllEmployees?page=${nextPage}&perPage=8">Next</a></li>`;
 }
 
 function updatePreviousAndNextButtons() {

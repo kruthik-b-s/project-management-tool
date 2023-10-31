@@ -12,7 +12,7 @@
 .employee-table {
   width: 100vw;
   height: 100vh;
-  padding: 120px;
+  padding: 130px 120px 50px 120px;
   display: flex;
   flex-direction: column;
   z-index: -1;
@@ -23,7 +23,7 @@
   font-weight: 700;
 }
 
-.rating-cell{
+.rating-cell {
   display: flex;
   justify-content: space-between;
   /* padding-right: 50px; */

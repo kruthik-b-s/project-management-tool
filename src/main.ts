@@ -28,6 +28,21 @@ async function bootstrap() {
           if (ratingArr.length > 0) return ratings / ratingArr.length;
           else return;
         },
+        projDisplay: (
+          projectsArr: Array<{
+            project_name: string;
+            client: string;
+            start_date: string;
+            end_date: string;
+          }>,
+        ) => {
+          const projects = [];
+          for (const project of projectsArr) {
+            projects.push(project.project_name);
+          }
+
+          return projects.join(', ');
+        },
       },
     }),
   );
