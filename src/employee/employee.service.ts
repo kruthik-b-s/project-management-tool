@@ -108,4 +108,45 @@ export class EmployeeService {
       totalPages: Math.ceil(employeeCount / perPageData),
     };
   }
+
+  async getAllReportingEmployees(
+    emp_id: number,
+    pageDetails: { page: string; perPage: string },
+  ) {
+    const { page, perPage } = pageDetails;
+    const pageNumber = parseInt(page);
+    const perPageData = parseInt(perPage);
+    const skip = (pageNumber - 1) * perPageData;
+
+    const reportingEmployees = await this.prisma.employee.findMany({
+      where: {
+        reporting_to_employee_id: emp_id,
+      },
+      include: {
+        performance: {
+          select: {
+            rating: true,
+          },
+        },
+        projects: {
+          select: {
+            project_name: true,
+          },
+        },
+      },
+      take: perPageData,
+      skip: skip,
+    });
+
+    const employeeCount = await this.prisma.employee.count({
+      where: {
+        reporting_to_employee_id: emp_id,
+      },
+    });
+
+    return {
+      employees: reportingEmployees,
+      totalPages: Math.ceil(employeeCount / perPageData),
+    };
+  }
 }

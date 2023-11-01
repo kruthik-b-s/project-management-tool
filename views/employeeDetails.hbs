@@ -74,9 +74,18 @@
         <div class="projects-title">
             <p>Projects</p>
         </div>
-        <div class="employee-projects"></div>
+        <div class="employee-projects">
+            {{#each employee.projects}}
+            <div class="card" style="width: 38rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.project_name}}</h5>
+                    <p>{{this.client}}</p>
+                    <a href="#" class="btn btn-primary">Remove from Project</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </div>
 
-<script src="/scripts/breadcrumb-nav.js"></script>
 <script src="/scripts/employee-details.js"></script>

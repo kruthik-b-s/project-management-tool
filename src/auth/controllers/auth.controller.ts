@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { GoogleAuthGuard } from '../guards/google.guard';
 import { AuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
@@ -6,12 +6,6 @@ import { Request, Response } from 'express';
 @Controller('api/auth')
 export class AuthController {
   constructor(private service: AuthService) {}
-
-  @Get('verify/:token')
-  async authenticate(@Param('token') token: string) {
-    const payload = await this.service.verifyToken(token);
-    return payload;
-  }
 
   @Get('google')
   @UseGuards(GoogleAuthGuard)
@@ -33,7 +27,7 @@ export class AuthController {
     });
 
     res.cookie('accessToken', token, {
-      // httpOnly: true, // cannot be accessed by scripts if set to true
+      httpOnly: true,
       secure: true,
       maxAge: 600000,
     });
@@ -45,24 +39,5 @@ export class AuthController {
     } else {
       res.render('homeUser');
     }
-  }
-
-  @Get('getAllEmployees')
-  viewAllEmployeesController() {
-    try {
-      return this.service.getAllEmployees();
-    } catch (error) {
-      return {
-        employee_id: null,
-        employee_name: null,
-        department: null,
-        performance: null,
-      };
-    }
-  }
-
-  @Get('/find/:email')
-  findByEmail(@Param('email') email: string) {
-    return this.service.findUserByEmail(email);
   }
 }

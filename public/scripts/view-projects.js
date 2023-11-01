@@ -18,6 +18,7 @@ filterBy.addEventListener('change', (e) => {
 
 const paginationPages = document.querySelector('#pages');
 const totalPages = paginationPages.textContent;
+console.log(totalPages);
 paginationPages.innerHTML = '';
 
 const projectStatus = filterBy.value;

@@ -10,6 +10,8 @@ import { ProjectModule } from './project/project.module';
 import { ProjectController } from './project/project.controller';
 import { ProjectService } from './project/project.service';
 import { EmployeePerformanceModule } from './employee-performance/employee-performance.module';
+import { JwtService } from '@nestjs/jwt';
+import { JwtUtils } from './auth/utils/jwt.utils';
 
 @Module({
   imports: [
@@ -23,6 +25,6 @@ import { EmployeePerformanceModule } from './employee-performance/employee-perfo
     EmployeePerformanceModule,
   ],
   controllers: [AppController, ProjectController],
-  providers: [ProjectService],
+  providers: [ProjectService, JwtService, JwtUtils],
 })
 export class AppModule {}
