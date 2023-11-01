@@ -1,3 +1,5 @@
+document.title = 'Project Management Tool | Employee Details';
+
 const inputName = document.querySelector('#inputName');
 inputName.disabled = true;
 

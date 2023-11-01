@@ -1,3 +1,5 @@
+document.title = 'Project Management Tool | View Projects';
+
 const filterBy = document.querySelector('#table-filter');
 
 filterBy.addEventListener('change', (e) => {

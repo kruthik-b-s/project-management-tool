@@ -1,3 +1,5 @@
+document.title = 'Project Management Tool | View Employees';
+
 const paginationPages = document.querySelector('#pages');
 const totalPages = paginationPages.textContent;
 paginationPages.innerHTML = '';
