@@ -1,18 +1,7 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Redirect,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, Req, Res, UseGuards } from '@nestjs/common';
 import { GoogleAuthGuard } from '../guards/google.guard';
 import { AuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
-import { LoginDto } from "../dto's/auth.dto";
 
 @Controller('api/auth')
 export class AuthController {
@@ -50,21 +39,11 @@ export class AuthController {
     });
 
     if (user.Role.role_name === 'superadmin') {
-      res.redirect('/pages/home-sa.html');
+      res.render('homeSuperAdmin');
     } else if (user.Role.role_name === 'admin') {
-      res.redirect('/pages/home-admin.html');
+      res.render('homeAdmin');
     } else {
-      res.redirect('/pages/home-user.html');
-    }
-  }
-
-  @Post('create')
-  @Redirect('/pages/home-sa.html')
-  createUserController(@Body() userDetails: LoginDto) {
-    try {
-      this.service.createUser(userDetails);
-    } catch (error) {
-      throw new Error(error.message);
+      res.render('homeUser');
     }
   }
 

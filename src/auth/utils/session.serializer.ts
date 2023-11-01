@@ -1,6 +1,6 @@
 import { PassportSerializer } from '@nestjs/passport';
 import { AuthService } from '../services/auth.service';
-import { LoginDto } from "../dto's/auth.dto";
+import { CreateEmployeeDto } from "../dto's/auth.dto";
 import { VerifyCallback } from 'passport-google-oauth20';
 import { Injectable } from '@nestjs/common';
 
@@ -10,7 +10,7 @@ export class SessionSerializer extends PassportSerializer {
     super();
   }
 
-  serializeUser(user: LoginDto, done: VerifyCallback) {
+  serializeUser(user: CreateEmployeeDto, done: VerifyCallback) {
     done(null, user);
   }
 

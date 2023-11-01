@@ -1,9 +1,33 @@
-import { Controller, Get, Param, Query, Render } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Render,
+} from '@nestjs/common';
 import { EmployeeService } from './employee.service';
+import { CreateEmployeeDto } from "src/auth/dto's/auth.dto";
 
 @Controller('api/employee')
 export class EmployeeController {
   constructor(private service: EmployeeService) {}
+
+  @Get('addEmployee')
+  @Render('addEmployee')
+  addNewEmployeeController() {}
+
+  @Post('createEmployee')
+  // @Render('addEmployee')
+  async createNewEmployee(@Body() userDetails: CreateEmployeeDto) {
+    try {
+      const employee = await this.service.createEmployee(userDetails);
+      return employee;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 
   @Get('getEmployee/:id')
   @Render('employeeDetails')

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import { LoginDto } from "../dto's/auth.dto";
 
 @Injectable()
 export class AuthService {
@@ -46,39 +45,6 @@ export class AuthService {
       return { message: 'Signed in sucessfully', user_details: userDetails };
     } catch (error) {
       return { message: 'Failed to sign in user', error: error.message };
-    }
-  }
-
-  async createUser(userDetails: LoginDto) {
-    try {
-      let user = await this.prisma.employee.findUnique({
-        where: {
-          email: userDetails.email,
-        },
-      });
-
-      const role = await this.prisma.role.findUnique({
-        where: {
-          role_name: userDetails.role,
-        },
-      });
-
-      if (user) {
-        return { message: 'Employee already exists' };
-      }
-
-      user = await this.prisma.employee.create({
-        data: {
-          employee_name: userDetails.employee_name,
-          email: userDetails.email,
-          department: userDetails.department,
-          employee_role_id: role.role_id,
-        },
-      });
-
-      return { message: 'Employee created sucessfully' };
-    } catch (error) {
-      return { message: 'Failed to create employee', error: error.message };
     }
   }
 
