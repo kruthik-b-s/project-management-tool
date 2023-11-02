@@ -1,4 +1,12 @@
-import { Controller, Get, Query, Req, Res, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Render,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { Request, Response } from 'express';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
@@ -49,4 +57,8 @@ export class ProjectController {
       throw new Error(error.message);
     }
   }
+
+  @Get('projectDetails')
+  @Render('projectDetails')
+  async getProjectDetails() {}
 }

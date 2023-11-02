@@ -5,11 +5,6 @@
   font-family: 'Raleway', sans-serif;
 }
 
-.title {
-  font-size: 2rem;
-  font-weight: 700;
-}
-
 .projects-table {
   width: 100vw;
   height: 100vh;
@@ -33,4 +28,48 @@
 
 #home {
   padding: 0px;
+}
+
+.title-div {
+  width: 84%;
+  position: absolute;
+  top: 120px;
+  left: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-details {
+  width: 100vw;
+  height: 100vh;
+  margin-top: 40px;
+  padding: 150px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.uploads-div {
+  width: 50%;
+  height: 100%;
+}
+
+.files-div {
+  width: 50%;
+  height: 100%;
+}
+
+.files {
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.files div {
+  margin-bottom: 10px;
+}
+
+#file-submit {
+  padding-top: 10px;
 }
