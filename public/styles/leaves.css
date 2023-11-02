@@ -26,3 +26,10 @@
   left: 100px;
   overflow-y: scroll;
 }
+
+.heading-leaves {
+  padding: 100px;
+  /* margin: 100px; */
+  display: flex;
+  justify-content: end;
+}

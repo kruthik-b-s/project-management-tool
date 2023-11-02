@@ -9,4 +9,34 @@
     </ol>
 </nav>
 
-<div class="leave-requests"></div>
+<div class="heading-leaves">
+    <a href="/api/leaves/nonPendingLeaves" id="toggle" class="btn btn-primary">Non pending Leaves</a>
+</div>
+
+<div class="leave-requests">    
+  {{#each leaves}}
+       <div class="card w-75 mb-3" id="leave-card">
+        <div class="card-body">
+            
+            <div class="card-title">Employee-ID : {{this.leave_application_employee_id}}</div>
+            <div class="card-status" id="status-{{this.leave_application_id}}">Status:{{this.status}}</div>
+            <div class="card-text">{{this.reason}}</div>
+            <div class="card-from_date dateElement">from_date:{{this.from_date}}</div>
+            <div class="card-till_date dateElement">till_date:{{this.till_date}}</div>
+            {{#if this.comments}}<div class="card-comments">Comments : {{this.comments}}</div>{{/if}}
+            {{#unless this.comments}}
+            <div class="mb-3">
+                <label for="comm-{{this.leave_application_id}}" class="form-label">Comments</label>
+                <textarea id="comm-{{this.leave_application_id}}" onkeyup=rejectDisable({{this.leave_application_id}}) class="form-control" rows="1"></textarea>
+            </div>
+              <button id="accept-{{this.leave_application_id}}" class="btn btn-primary accept-button" onclick=updateStatus({{this.leave_application_id}},"approve")>Approve</button>
+             <button id="reject-{{this.leave_application_id}}"  class="btn btn-primary reject-button" onclick=updateStatus({{this.leave_application_id}},"reject") disabled>Reject</button>              
+            {{/unless}}
+        </div>
+    </div>
+
+  {{/each}}
+</div>
+
+<script src="/scripts/breadcrumb-nav.js"></script>
+<script src="/scripts/leaves.js"></script>
