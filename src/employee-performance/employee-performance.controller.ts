@@ -6,11 +6,14 @@ import {
   Query,
   Render,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { EmployeePerformanceService } from './employee-performance.service';
 import { EmployeeService } from 'src/employee/employee.service';
 import { Response } from 'express';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
+@UseGuards(JwtGuard)
 @Controller('api/employee-performance')
 export class EmployeePerformanceController {
   constructor(

@@ -10,11 +10,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
-import { CreateEmployeeDto } from "src/auth/dto's/auth.dto";
+import { CreateEmployeeDto } from "src/dto's/auth.dto";
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { Request, Response } from 'express';
 import { JwtUtils } from 'src/auth/utils/jwt.utils';
 
+@UseGuards(JwtGuard)
 @Controller('api/employee')
 export class EmployeeController {
   constructor(
@@ -23,7 +24,6 @@ export class EmployeeController {
   ) {}
 
   @Get('addEmployee')
-  @UseGuards(JwtGuard)
   async addNewEmployeeController(@Req() req: Request, @Res() res: Response) {
     try {
       const payload = await this.jwtUtil.getTokenPayload(req);
@@ -59,7 +59,6 @@ export class EmployeeController {
   }
 
   @Get('getEmployee/:id')
-  @UseGuards(JwtGuard)
   async getEmployeeDetailsByIdController(
     @Req() req: Request,
     @Param('id') id: string,
@@ -91,8 +90,6 @@ export class EmployeeController {
   }
 
   @Get('viewAllEmployees')
-  @UseGuards(JwtGuard)
-  // @Render('viewEmployees')
   async getAllEmployeeDetails(
     @Req() req: Request,
     @Query() pageDetails: { page: string; perPage: string },

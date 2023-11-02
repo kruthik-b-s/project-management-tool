@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { JwtUtils } from 'src/auth/utils/jwt.utils';
 
+@UseGuards(JwtGuard)
 @Controller('api/project')
 export class ProjectController {
   constructor(
@@ -12,8 +13,6 @@ export class ProjectController {
   ) {}
 
   @Get('projects')
-  // @Render('viewAllProjects')
-  @UseGuards(JwtGuard)
   async getAllProjectsController(
     @Req() req: Request,
     @Query() pageDetails: { status: string; page: string; perPage: string },

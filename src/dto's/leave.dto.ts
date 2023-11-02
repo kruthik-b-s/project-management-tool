@@ -4,5 +4,5 @@ export interface LeaveDto {
   from_date: Date;
   till_date: Date;
   reason: string;
-//status-pending by default
+  //status-pending by default
 }

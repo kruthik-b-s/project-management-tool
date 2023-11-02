@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const rejectDisable = (id) => {
   const rejectBtn = document.querySelector(`#reject-${id}`);
   const commentBox = document.querySelector(`#comm-${id}`);
@@ -10,7 +11,7 @@ const rejectDisable = (id) => {
 
 // Select all <div> elements with querySelectorAll
 const dateElements = document.querySelectorAll('.dateElement');
-console.log(dateElements)
+console.log(dateElements);
 // Define a function to convert ISO dates to local format
 function convertISOToLocal(isoDate) {
   const date = new Date(isoDate);
@@ -27,17 +28,16 @@ function convertISOToLocal(isoDate) {
 dateElements.forEach((dateElement) => {
   // Extract the ISO date from the innerText
   let isoDate = dateElement.innerText;
- if(isoDate.includes('from_date:')){
-  isoDate.replace('from_date:', '')
-  let localDate = convertISOToLocal(isoDate);
-  dateElement.innerText = "From_date: "+ localDate;
- }else if(isoDate.includes('till_date:')){
-  isoDate.replace('till_date:', '');
+  if (isoDate.includes('from_date:')) {
+    isoDate.replace('from_date:', '');
     let localDate = convertISOToLocal(isoDate);
-    dateElement.innerText = "Till_date: " + localDate;
- }
+    dateElement.innerText = 'From_date: ' + localDate;
+  } else if (isoDate.includes('till_date:')) {
+    isoDate.replace('till_date:', '');
+    let localDate = convertISOToLocal(isoDate);
+    dateElement.innerText = 'Till_date: ' + localDate;
+  }
   // console.log('---->>', isoDate);
-
 });
 
 window.onload = () => {
@@ -51,6 +51,7 @@ window.onload = () => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const updateStatus = (id, decision) => {
   const acceptBtn = document.querySelector(`#accept-${id}`);
   const rejectBtn = document.querySelector(`#reject-${id}`);
