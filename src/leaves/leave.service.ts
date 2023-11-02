@@ -16,6 +16,7 @@ export class LeavesService {
         leave_application_employee_id: true,
         from_date: true,
         till_date: true,
+        reason:true,
         status: true,
       },
     });
