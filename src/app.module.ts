@@ -12,6 +12,7 @@ import { ProjectService } from './project/project.service';
 import { EmployeePerformanceModule } from './employee-performance/employee-performance.module';
 import { JwtService } from '@nestjs/jwt';
 import { JwtUtils } from './auth/utils/jwt.utils';
+import { LeavesModule } from './leaves/leave.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { JwtUtils } from './auth/utils/jwt.utils';
     EmployeeModule,
     ProjectModule,
     EmployeePerformanceModule,
+    LeavesModule
   ],
   controllers: [AppController, ProjectController],
   providers: [ProjectService, JwtService, JwtUtils],
