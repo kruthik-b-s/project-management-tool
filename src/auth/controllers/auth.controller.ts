@@ -2,10 +2,15 @@ import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { GoogleAuthGuard } from '../guards/google.guard';
 import { AuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
+import { JwtGuard } from '../guards/jwt.guard';
+import { JwtUtils } from '../utils/jwt.utils';
 
 @Controller('api/auth')
 export class AuthController {
-  constructor(private service: AuthService) {}
+  constructor(
+    private service: AuthService,
+    private jwtUtil: JwtUtils,
+  ) {}
 
   @Get('google')
   @UseGuards(GoogleAuthGuard)
@@ -35,6 +40,20 @@ export class AuthController {
     if (user.Role.role_name === 'superadmin') {
       res.render('homeSuperAdmin');
     } else if (user.Role.role_name === 'admin') {
+      res.render('homeAdmin');
+    } else {
+      res.render('homeUser');
+    }
+  }
+
+  @Get('homePage')
+  @UseGuards(JwtGuard)
+  async getHomePage(@Req() req: Request, @Res() res: Response) {
+    const payload = await this.jwtUtil.getTokenPayload(req);
+
+    if (payload['role'] === 'superadmin') {
+      res.render('homeSuperAdmin');
+    } else if (payload['role'] === 'admin') {
       res.render('homeAdmin');
     } else {
       res.render('homeUser');

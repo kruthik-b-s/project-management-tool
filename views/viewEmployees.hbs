@@ -19,7 +19,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Employee Name</th>
                 <th scope="col">Department</th>
-                <th scope="col">Performance (Last Month)</th>
+                <th scope="col">Performance Aggregate</th>
                 <th scope="col">Current project</th>
                 <th scope="col">Performance history</th>
             </tr>
@@ -75,7 +75,7 @@
                 </td>
                 <td>{{projDisplay this.projects}}</td>
                 <td><a
-                        href="/api/employee-performance/employeePerformanceHistory?emp_id={{this.employee_id}}&page=1&perPage=10">View
+                        href="/api/employee-performance/employeePerformanceHistory?emp_id={{this.employee_id}}&filter=none&page=1&perPage=10">View
                         Performance history</a></td>
             </tr>
             {{/each}}
@@ -87,4 +87,5 @@
     </nav>
 </div>
 
+<script src="/scripts/breadcrumb-nav.js"></script>
 <script src="/scripts/view-employees.js"></script>

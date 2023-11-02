@@ -5,11 +5,13 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SessionSerializer } from './utils/session.serializer';
 import { JwtService } from '@nestjs/jwt';
+import { JwtUtils } from './utils/jwt.utils';
 
 @Module({
   providers: [
     AuthService,
     JwtService,
+    JwtUtils,
     GoogleStrategy,
     PrismaService,
     SessionSerializer,

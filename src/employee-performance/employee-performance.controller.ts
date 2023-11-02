@@ -21,7 +21,13 @@ export class EmployeePerformanceController {
   @Get('employeePerformanceHistory')
   @Render('employeePerformance')
   async getEmployeePerformanceHistory(
-    @Query() pageDetails: { emp_id: string; page: string; perPage: string },
+    @Query()
+    pageDetails: {
+      emp_id: string;
+      filter: string;
+      page: string;
+      perPage: string;
+    },
   ) {
     const performanceHistory =
       await this.service.getEmployeePerformanceHistory(pageDetails);
