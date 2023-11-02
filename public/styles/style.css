@@ -33,7 +33,6 @@
   font-weight: 700;
 }
 
-.new-employee,
 #login {
   width: 100vw;
   height: 100vh;
@@ -42,6 +41,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.new-employee {
+  width: 100vw;
+  height: 100vh;
+  padding: 150px 120px;
+}
+
+#create-form {
+  display: flex;
+  flex-direction: row;
 }
 
 label {

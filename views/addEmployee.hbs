@@ -13,7 +13,7 @@
     <div class="title">
         <p>Create a user</p>
     </div>
-    <form class="row g-3" action="/api/employee/createEmployee" method="post">
+    <form id="create-form" class="row g-3" action="/api/employee/createEmployee" method="post">
         <div class="col-md-6">
             <label for="inputName" class="form-label">Name</label>
             <input type="text" class="form-control" id="inputName" placeholder="Employee name" name="employee_name" />
@@ -50,7 +50,7 @@
                 <option>Design</option>
             </select>
         </div>
-        <div class="col-12">
+        <div class="col-12" id="button">
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>
