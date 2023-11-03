@@ -82,6 +82,25 @@ h5 {
   align-items: center;
 }
 
+#apply-leave-form {
+  width: 100%;
+}
+
+.leave-container {
+  width: 100vw;
+  height: 120vh;
+  padding: 120px;
+  margin-top: -50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-label {
+  display: inline;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
