@@ -19,13 +19,12 @@ export class LeavesController {
   constructor(private service: LeavesService) {}
 
   @Get('viewAllLeaves')
-  @Render('leaveRequests')
   async getAllLeaveDetails(@Res() res: Response) {
     const leaves = await this.service.getAllLeaves();
     if (leaves.length == 0) {
-      res.send('<h1>No Leave Approval Pending</h1>');
+      return res.send('<h1>No Leave Approval Pending</h1>');
     }
-    return { leaves: leaves };
+    res.render('leaveRequests', { leaves: leaves });
   }
 
   @Post('statusUpdate')
