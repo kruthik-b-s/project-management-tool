@@ -1,3 +1,5 @@
+document.title = 'Project Management Tool | Apply leave';
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function optionSelected() {
   const leaveType = document.querySelector('#leave_type').value;
