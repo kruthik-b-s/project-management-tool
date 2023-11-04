@@ -1,6 +1,9 @@
 import {
+  Body,
   Controller,
   Get,
+  Param,
+  Post,
   Query,
   Render,
   Req,
@@ -11,6 +14,7 @@ import { ProjectService } from './project.service';
 import { Request, Response } from 'express';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { JwtUtils } from 'src/auth/utils/jwt.utils';
+import { CreateNotes } from "src/dto's/auth.dto";
 
 @UseGuards(JwtGuard)
 @Controller('api/project')
@@ -58,7 +62,27 @@ export class ProjectController {
     }
   }
 
-  @Get('projectDetails')
+  @Get('projectDetails/:project_id')
   @Render('projectDetails')
-  async getProjectDetails() {}
+  async getProjectDetails(@Param('project_id') project_id: string) {
+    return { project: await this.service.getProjectById(project_id) };
+  }
+
+  @Post('addNotes/:project_id')
+  // @Render('projectDetails')
+  async addNotesToProjectController(
+    @Param('project_id') project_id: string,
+    @Body() notes: CreateNotes,
+    @Res() res: Response,
+  ) {
+    const projectDetails = await this.service.addNotesToProject(
+      project_id,
+      notes,
+    );
+
+    res.render('projectDetails', {
+      projectDetails: projectDetails.projectDetails,
+      project: projectDetails.project,
+    });
+  }
 }

@@ -6,3 +6,7 @@ export interface CreateEmployeeDto {
   phone_number?: string;
   reporting_employee_id?: string;
 }
+
+export interface CreateNotes {
+  notes: string;
+}

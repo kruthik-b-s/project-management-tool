@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateNotes } from "src/dto's/auth.dto";
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -159,5 +160,50 @@ export class ProjectService {
     });
 
     return { projects, totalDataCount };
+  }
+
+  async getProjectById(project_id: string) {
+    return await this.prisma.project.findUnique({
+      where: {
+        project_id: parseInt(project_id),
+      },
+      include: {
+        project_details: {
+          select: {
+            project_detail_id: true,
+            notes: true,
+          },
+        },
+      },
+    });
+  }
+
+  async addNotesToProject(project_id: string, notes: CreateNotes) {
+    const project = await this.prisma.project.findUnique({
+      where: {
+        project_id: parseInt(project_id),
+      },
+      include: {
+        project_details: {
+          select: {
+            project_detail_id: true,
+          },
+        },
+      },
+    });
+
+    const projectDetails = await this.prisma.projectDetail.update({
+      where: {
+        project_detail_id: project.project_details.project_detail_id,
+      },
+      data: {
+        notes: notes.notes,
+      },
+    });
+
+    return {
+      projectDetails,
+      project: await this.getProjectById(project.project_id.toString()),
+    };
   }
 }

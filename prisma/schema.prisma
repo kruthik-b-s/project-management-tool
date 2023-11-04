@@ -55,13 +55,14 @@ model Project {
 }
 
 model ProjectDetail {
-  project_detail_id  Int      @id @default(autoincrement())
-  project_url        String   @unique
-  login_name         String
-  login_password     String
-  tech_stack         String[]
-  project            Project  @relation(fields: [project_details_id], references: [project_id])
-  project_details_id Int      @unique
+  project_detail_id          Int      @id @default(autoincrement())
+  project_url                String   @unique
+  login_name                 String
+  login_password             String
+  tech_stack                 String[]
+  notes                      String
+  project                    Project  @relation(fields: [project_details_project_id], references: [project_id])
+  project_details_project_id Int      @unique
 }
 
 model Leave {
