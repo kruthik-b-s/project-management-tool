@@ -114,4 +114,17 @@ export class EmployeeController {
       throw new Error(error.message);
     }
   }
+
+  @Get('employeesOnProject/:project_id')
+  async getAllEmployeesOnProject(
+    @Param('project_id') project_id: string,
+    @Query() pageDetails: { page: string; perPage: string },
+    @Res() res: Response,
+  ) {
+    const employees = await this.service.getAllEmployeesOnProject(
+      project_id,
+      pageDetails,
+    );
+    res.render('viewEmployees', { employees });
+  }
 }

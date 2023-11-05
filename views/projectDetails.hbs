@@ -15,7 +15,8 @@
 <div class="title-div title">
     <p>{{project.project_name}} - {{project.client}}</p>
     <div>
-        <button class="btn btn-primary btn-sm" type="button">Employees on project</button>
+        <span id="project-id">{{project.project_id}}</span>
+        <button id="project-employees" class="btn btn-primary btn-sm" type="submit">Employees on project</button>
     </div>
 </div>
 <div class="project-details">
@@ -32,7 +33,8 @@
         <div class="mb-3">
             <form action="/api/project/addNotes/{{project.project_id}}" method="post">
                 <label for="exampleFormControlTextarea1" class="form-label">Project Notes</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="notes" disabled>{{project.project_details.notes}}</textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="notes"
+                    disabled>{{project.project_details.notes}}</textarea>
                 <div id="file-submit" class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button id="add-note" class="btn btn-primary me-md-2" type="button">Add notes</button>
                     <button class="btn btn-primary" type="submit">update</button>
