@@ -5,13 +5,15 @@ import {
   Post,
   Query,
   Render,
+  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import { EmployeePerformanceService } from './employee-performance.service';
 import { EmployeeService } from 'src/employee/employee.service';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
+import { JwtUtils } from 'src/auth/utils/jwt.utils';
 
 @UseGuards(JwtGuard)
 @Controller('api/employee-performance')
@@ -19,11 +21,13 @@ export class EmployeePerformanceController {
   constructor(
     private service: EmployeePerformanceService,
     private employeeService: EmployeeService,
+    private jwtUtil: JwtUtils,
   ) {}
 
   @Get('employeePerformanceHistory')
   @Render('employeePerformance')
   async getEmployeePerformanceHistory(
+    @Req() req: Request,
     @Query()
     pageDetails: {
       emp_id: string;
@@ -32,17 +36,26 @@ export class EmployeePerformanceController {
       perPage: string;
     },
   ) {
-    const performanceHistory =
-      await this.service.getEmployeePerformanceHistory(pageDetails);
+    try {
+      if (pageDetails.emp_id === '') {
+        const payload = await this.jwtUtil.getTokenPayload(req);
+        pageDetails.emp_id = payload['sub'].toString();
+      }
 
-    const employeeDetails = await this.employeeService.getEmployeeDetailsById(
-      parseInt(pageDetails.emp_id),
-    );
+      const performanceHistory =
+        await this.service.getEmployeePerformanceHistory(pageDetails);
 
-    return {
-      performanceHistory: performanceHistory,
-      employee: employeeDetails,
-    };
+      const employeeDetails = await this.employeeService.getEmployeeDetailsById(
+        parseInt(pageDetails.emp_id),
+      );
+
+      return {
+        performanceHistory: performanceHistory,
+        employee: employeeDetails,
+      };
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   @Post('addRating')

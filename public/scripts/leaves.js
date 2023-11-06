@@ -42,11 +42,12 @@ dateElements.forEach((dateElement) => {
 
 window.onload = () => {
   const toggle = document.querySelector('#toggle');
-  if (window.location.pathname === '/api/leaves/viewAllLeaves') {
-    toggle.pathname = '/api/leaves/nonPendingLeaves';
+  const toggleStatus = window.location.href.split('?')[1];
+  if (toggleStatus === 'pending=true') {
+    toggle.href = '/api/leaves/nonPendingLeaves?pending=false';
     toggle.innerText = 'Non Pending Leaves';
   } else {
-    toggle.pathname = '/api/leaves/viewAllLeaves';
+    toggle.href = '/api/leaves/viewAllLeaves?pending=true';
     toggle.innerText = 'Pending Leaves';
   }
 };

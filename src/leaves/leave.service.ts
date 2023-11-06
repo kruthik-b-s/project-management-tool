@@ -6,20 +6,46 @@ import { LeaveDto } from "src/dto's/leave.dto";
 export class LeavesService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllLeaves() {
+  async getAllLeaves(status: { pending: string }) {
+    let statusCondition;
+    if (status.pending === 'true') statusCondition = 'pending';
+    else statusCondition = { not: 'pending' };
+
     const leaves = await this.prisma.leaveApplication.findMany({
       where: {
-        status: 'pending',
-      },
-      select: {
-        leave_application_id: true,
-        leave_application_employee_id: true,
-        from_date: true,
-        till_date: true,
-        reason: true,
-        status: true,
+        status: statusCondition,
       },
     });
+    return leaves;
+  }
+
+  async getMyReporteesLeaves(emp_id: number, status: { pending: string }) {
+    let statusCondition;
+    if (status.pending === 'true') statusCondition = 'pending';
+    else statusCondition = { not: 'pending' };
+
+    const reportingEmployees = await this.prisma.employee.findMany({
+      where: {
+        reporting_to_employee_id: emp_id,
+      },
+      select: {
+        employee_id: true,
+      },
+    });
+
+    const reportingEmployeesId = reportingEmployees.map((employee) => {
+      return employee.employee_id;
+    });
+
+    const leaves = await this.prisma.leaveApplication.findMany({
+      where: {
+        leave_application_employee_id: {
+          in: reportingEmployeesId,
+        },
+        status: statusCondition,
+      },
+    });
+
     return leaves;
   }
 
@@ -33,15 +59,6 @@ export class LeavesService {
       },
     });
     return updatedLeaveStatus;
-  }
-
-  async nonPendingLeaves() {
-    const leaves = await this.prisma.leaveApplication.findMany({
-      where: {
-        status: { not: 'pending' },
-      },
-    });
-    return leaves;
   }
 
   async createLeave(leaveDetails: LeaveDto) {

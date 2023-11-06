@@ -3,28 +3,53 @@ import {
   Controller,
   Get,
   Post,
+  Query,
   Render,
+  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import { LeavesService } from './leave.service';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { LeaveDto } from "src/dto's/leave.dto";
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { StatusUpdateDto } from "src/dto's/statusUpdate.dto";
+import { JwtUtils } from 'src/auth/utils/jwt.utils';
 
 @UseGuards(JwtGuard)
 @Controller('api/leaves')
 export class LeavesController {
-  constructor(private service: LeavesService) {}
+  constructor(
+    private service: LeavesService,
+    private jwtUtil: JwtUtils,
+  ) {}
 
   @Get('viewAllLeaves')
-  async getAllLeaveDetails(@Res() res: Response) {
-    const leaves = await this.service.getAllLeaves();
-    if (leaves.length == 0) {
-      res.render('leaveRequests', { message: 'No pending approvals' });
-    } else {
-      res.render('leaveRequests', { leaves: leaves });
+  async getAllLeaveDetails(
+    @Req() req: Request,
+    @Query() status: { pending: string },
+    @Res() res: Response,
+  ) {
+    try {
+      const payload = await this.jwtUtil.getTokenPayload(req);
+
+      let leaves;
+      if (payload['role'] === 'superadmin') {
+        leaves = await this.service.getAllLeaves(status);
+      } else {
+        leaves = await this.service.getMyReporteesLeaves(
+          payload['sub'],
+          status,
+        );
+      }
+
+      if (leaves.length == 0) {
+        res.render('leaveRequests', { message: 'No pending approvals' });
+      } else {
+        res.render('leaveRequests', { leaves: leaves });
+      }
+    } catch (error) {
+      throw new Error(error.message);
     }
   }
 
@@ -42,12 +67,30 @@ export class LeavesController {
   }
 
   @Get('nonPendingLeaves')
-  async CompletedLeaves(@Res() res: Response) {
-    const leaves = await this.service.nonPendingLeaves();
-    if (leaves.length == 0) {
-      res.render('leaveRequests', { message: 'No leaves approved' });
-    } else {
-      res.render('leaveRequests', { leaves: leaves });
+  async CompletedLeaves(
+    @Req() req: Request,
+    @Query() status: { pending: string },
+    @Res() res: Response,
+  ) {
+    try {
+      const payload = await this.jwtUtil.getTokenPayload(req);
+      let leaves;
+      if (payload['role'] === 'superadmin') {
+        leaves = await this.service.getAllLeaves(status);
+      } else {
+        leaves = await this.service.getMyReporteesLeaves(
+          payload['sub'],
+          status,
+        );
+      }
+
+      if (leaves.length == 0) {
+        res.render('leaveRequests', { message: 'No leaves approved' });
+      } else {
+        res.render('leaveRequests', { leaves: leaves });
+      }
+    } catch (error) {
+      throw new Error(error.message);
     }
   }
 
