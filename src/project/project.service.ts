@@ -1,10 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { CreateNotes } from "src/dto's/auth.dto";
+import { CreateNotes, CreateProjectDto } from "src/dto's/auth.dto";
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ProjectService {
   constructor(private prisma: PrismaService) {}
+
+  async createProjectWithDetails(projectDetails: CreateProjectDto) {
+    const techStack = projectDetails.tech_stack.split(',');
+
+    const project = await this.prisma.project.create({
+      data: {
+        project_name: projectDetails.project_name,
+        client: projectDetails.client,
+        start_date: new Date(projectDetails.start_date),
+        end_date: new Date(projectDetails.end_date),
+        project_details: {
+          create: {
+            project_url: projectDetails.project_url,
+            login_name: projectDetails.login_name,
+            login_password: projectDetails.login_password,
+            tech_stack: techStack,
+          },
+        },
+      },
+    });
+
+    return project;
+  }
 
   async getAllProjects(pageDetails: {
     status: string;

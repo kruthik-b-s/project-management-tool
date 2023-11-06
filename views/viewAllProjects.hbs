@@ -37,7 +37,7 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a new Project</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="#" method="post">
+                <form action="/api/project/addNewProject" method="post">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
@@ -68,21 +68,21 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
                                 URL</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="project_url">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
                                 Username</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="login_name">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
                                 Password</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="login_password">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" id="input-label" class="form-label">Tech Stack</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Format: tech-1,tech-2,tech-3..." name="tech_stack">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -112,8 +112,8 @@
                     <th>{{this.project_id}}</th>
                     <td>{{this.project_name}}</td>
                     <td>{{this.client}}</td>
-                    <td>{{this.start_date}}</td>
-                    <td>{{this.end_date}}</td>
+                    <td>{{dateFormat this.start_date}}</td>
+                    <td>{{dateFormat this.end_date}}</td>
                     <td>{{this.status}}</td>
                     <td><a href="/api/project/projectDetails/{{this.project_id}}">click here</a></td>
                 </tr>

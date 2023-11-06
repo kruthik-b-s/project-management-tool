@@ -48,6 +48,9 @@ async function bootstrap() {
             return 'stand-by/benched';
           }
         },
+        dateFormat: (data) => {
+          return new Date(data).toLocaleDateString();
+        },
       },
     }),
   );

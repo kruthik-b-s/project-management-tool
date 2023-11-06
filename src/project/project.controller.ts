@@ -14,7 +14,7 @@ import { ProjectService } from './project.service';
 import { Request, Response } from 'express';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { JwtUtils } from 'src/auth/utils/jwt.utils';
-import { CreateNotes } from "src/dto's/auth.dto";
+import { CreateNotes, CreateProjectDto } from "src/dto's/auth.dto";
 
 @UseGuards(JwtGuard)
 @Controller('api/project')
@@ -23,6 +23,11 @@ export class ProjectController {
     private service: ProjectService,
     private jwtUtil: JwtUtils,
   ) {}
+
+  @Post('addNewProject')
+  async addNewProject(@Body() projectDetails: CreateProjectDto) {
+    return this.service.createProjectWithDetails(projectDetails);
+  }
 
   @Get('projects')
   async getAllProjectsController(

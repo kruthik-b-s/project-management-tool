@@ -10,3 +10,14 @@ export interface CreateEmployeeDto {
 export interface CreateNotes {
   notes: string;
 }
+
+export interface CreateProjectDto {
+  project_name: string;
+  client: string;
+  start_date: string;
+  end_date: string;
+  project_url?: string;
+  login_name?: string;
+  login_password?: string;
+  tech_stack?: string;
+}
