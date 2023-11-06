@@ -12,14 +12,84 @@
 <div class="projects-table">
     <div class="top-bar">
         <div class="title">
-            <p>Projects</p>
+            <p>Projects <span class="filter"></span></p>
         </div>
         <div>
+            <p id="add-project-cond">{{add}}</p>
+            <button type="button" id="add-project" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                Add Project
+            </button>
             <select name="filter" id="table-filter">
+                <option value="none" selected>Choose...</option>
                 <option value="on-going">on-going</option>
                 <option value="completed">completed</option>
-                <option value="all" selected>all</option>
+                <option value="all">all</option>
             </select>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add a new Project</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="#" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
+                                Name</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="project_name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Client</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="client"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Start date</label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" name="start_date"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">End date</label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" name="end_date"
+                                required>
+                        </div>
+
+                        <hr>
+                        <span class="project-details-span">Project Details</span>
+                        <hr>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
+                                URL</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
+                                Username</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Project
+                                Password</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" id="input-label" class="form-label">Tech Stack</label>
+                            <input type="text" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

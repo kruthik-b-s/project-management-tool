@@ -125,6 +125,6 @@ export class EmployeeController {
       project_id,
       pageDetails,
     );
-    res.render('viewEmployees', { employees });
+    res.render('employeesOnProject', { employees });
   }
 }

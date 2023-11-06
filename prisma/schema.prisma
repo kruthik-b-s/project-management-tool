@@ -49,7 +49,7 @@ model Project {
   client          String
   start_date      DateTime       @db.Date
   end_date        DateTime       @db.Date
-  status          String
+  status          String         @default("on-going")
   employees       Employee[]
   project_details ProjectDetail?
 }

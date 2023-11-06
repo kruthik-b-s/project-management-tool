@@ -167,18 +167,6 @@ export class EmployeeService {
           },
         },
       },
-      include: {
-        performance: {
-          select: {
-            rating: true,
-          },
-        },
-        projects: {
-          select: {
-            project_name: true,
-          },
-        },
-      },
       take: perPageData,
       skip: skip,
     });
@@ -194,6 +182,7 @@ export class EmployeeService {
     });
 
     return {
+      project_id,
       employees: employees,
       totalPages: Math.ceil(employeeCount / perPageData),
     };

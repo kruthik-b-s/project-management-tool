@@ -1,5 +1,15 @@
 document.title = 'Project Management Tool | View Projects';
 
+const addProject = document.querySelector('#add-project-cond');
+const addProjectAllowed = addProject.textContent;
+addProject.textContent = '';
+
+const addProjectButton = document.querySelector('#add-project');
+
+if (addProjectAllowed === 'false') {
+  addProjectButton.disabled = true;
+}
+
 const filterBy = document.querySelector('#table-filter');
 
 filterBy.addEventListener('change', (e) => {
@@ -18,10 +28,16 @@ filterBy.addEventListener('change', (e) => {
 
 const paginationPages = document.querySelector('#pages');
 const totalPages = paginationPages.textContent;
-console.log(totalPages);
 paginationPages.innerHTML = '';
 
-const projectStatus = filterBy.value;
+function getProjectStatus() {
+  const queryParams = window.location.href.split('?')[1];
+  const statusParam = queryParams.split('&')[0];
+  const status = statusParam.split('=')[1];
+  return status;
+}
+
+const projectStatus = getProjectStatus();
 
 function getCurrentPage() {
   const queryParams = window.location.href.split('?')[1];

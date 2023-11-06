@@ -37,24 +37,18 @@ export class ProjectController {
       let projects;
       if (payload['role'] === 'superadmin') {
         projects = await this.service.getAllProjects(pageDetails);
+        res.render('viewAllProjects', {
+          projects,
+          add: 'true',
+        });
       } else {
         projects = await this.service.getAllMyProjects(
           payload['sub'],
           pageDetails,
         );
-      }
-
-      if (pageDetails.status === 'all') {
         res.render('viewAllProjects', {
           projects,
-        });
-      } else if (pageDetails.status === 'completed') {
-        res.render('viewCompletedProjects', {
-          projects,
-        });
-      } else if (pageDetails.status === 'on-going') {
-        res.render('viewOngoingProjects', {
-          projects,
+          add: 'false',
         });
       }
     } catch (error) {

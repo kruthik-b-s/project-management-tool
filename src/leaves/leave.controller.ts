@@ -22,9 +22,10 @@ export class LeavesController {
   async getAllLeaveDetails(@Res() res: Response) {
     const leaves = await this.service.getAllLeaves();
     if (leaves.length == 0) {
-      return res.send('<h1>No Leave Approval Pending</h1>');
+      res.render('leaveRequests', { message: 'No pending approvals' });
+    } else {
+      res.render('leaveRequests', { leaves: leaves });
     }
-    res.render('leaveRequests', { leaves: leaves });
   }
 
   @Post('statusUpdate')
@@ -44,9 +45,10 @@ export class LeavesController {
   async CompletedLeaves(@Res() res: Response) {
     const leaves = await this.service.nonPendingLeaves();
     if (leaves.length == 0) {
-      return res.send('<h1> Leave Approval Pending</h1>');
+      res.render('leaveRequests', { message: 'No leaves approved' });
+    } else {
+      res.render('leaveRequests', { leaves: leaves });
     }
-    res.render('leaveRequests', { leaves: leaves });
   }
 
   @Get('addLeave')

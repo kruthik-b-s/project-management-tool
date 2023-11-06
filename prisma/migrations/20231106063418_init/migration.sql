@@ -40,7 +40,7 @@ CREATE TABLE "Project" (
     "client" TEXT NOT NULL,
     "start_date" DATE NOT NULL,
     "end_date" DATE NOT NULL,
-    "status" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'on-going',
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("project_id")
 );
@@ -52,7 +52,8 @@ CREATE TABLE "ProjectDetail" (
     "login_name" TEXT NOT NULL,
     "login_password" TEXT NOT NULL,
     "tech_stack" TEXT[],
-    "project_details_id" INTEGER NOT NULL,
+    "notes" TEXT NOT NULL,
+    "project_details_project_id" INTEGER NOT NULL,
 
     CONSTRAINT "ProjectDetail_pkey" PRIMARY KEY ("project_detail_id")
 );
@@ -75,8 +76,8 @@ CREATE TABLE "LeaveApplication" (
     "from_date" TIMESTAMP(3) NOT NULL,
     "till_date" TIMESTAMP(3) NOT NULL,
     "reason" TEXT NOT NULL,
-    "status" TEXT NOT NULL,
-    "comments" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'pending',
+    "comments" TEXT,
     "leave_application_employee_id" INTEGER,
 
     CONSTRAINT "LeaveApplication_pkey" PRIMARY KEY ("leave_application_id")
@@ -101,7 +102,7 @@ CREATE UNIQUE INDEX "Project_project_name_key" ON "Project"("project_name");
 CREATE UNIQUE INDEX "ProjectDetail_project_url_key" ON "ProjectDetail"("project_url");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ProjectDetail_project_details_id_key" ON "ProjectDetail"("project_details_id");
+CREATE UNIQUE INDEX "ProjectDetail_project_details_project_id_key" ON "ProjectDetail"("project_details_project_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Leave_employee_leave_id_key" ON "Leave"("employee_leave_id");
@@ -119,7 +120,7 @@ ALTER TABLE "Employee" ADD CONSTRAINT "Employee_employee_role_id_fkey" FOREIGN K
 ALTER TABLE "Performance" ADD CONSTRAINT "Performance_performance_employee_id_fkey" FOREIGN KEY ("performance_employee_id") REFERENCES "Employee"("employee_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ProjectDetail" ADD CONSTRAINT "ProjectDetail_project_details_id_fkey" FOREIGN KEY ("project_details_id") REFERENCES "Project"("project_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProjectDetail" ADD CONSTRAINT "ProjectDetail_project_details_project_id_fkey" FOREIGN KEY ("project_details_project_id") REFERENCES "Project"("project_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Leave" ADD CONSTRAINT "Leave_employee_leave_id_fkey" FOREIGN KEY ("employee_leave_id") REFERENCES "Employee"("employee_id") ON DELETE RESTRICT ON UPDATE CASCADE;
