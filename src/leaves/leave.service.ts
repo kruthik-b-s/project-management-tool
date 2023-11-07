@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LeaveDto } from "src/dto's/leave.dto";
+import { errorMonitor } from 'events';
 
 @Injectable()
 export class LeavesService {
@@ -77,17 +78,18 @@ export class LeavesService {
       });
       return { message: 'Leave applied sucessfully' };
     } catch (error) {
+      console.log(error.message)
       return { message: 'Failed to apply leave', error: error.message };
     }
   }
 
-  async getLeavetype() {
-    const id = 1;
+  async getLeavetype(id) {
     return await this.prisma.leave.findUnique({
       where: {
         employee_leave_id: id,
       },
       select: {
+        employee_leave_id:true,
         casual_leaves: true,
         sick_leaves: true,
         floater_leaves: true,

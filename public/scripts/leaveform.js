@@ -1,14 +1,21 @@
 document.title = 'Project Management Tool | Apply leave';
+console.log("hii");
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function optionSelected() {
-  const leaveType = document.querySelector('#leave_type').value;
 
-  if (leaveType == 'Casual') {
-    console.log(leaveType);
-  } else if (leaveType == 'Sick') {
-    console.log(leaveType);
-  } else if (leaveType == 'Floater') {
-    console.log(leaveType);
+const leaveType = document.querySelector('#leaveType')
+leaveType.addEventListener('change',()=>{
+  { 
+    let leaveTypeValue = leaveType.value
+    if (leaveTypeValue  == 'Casual') {
+      console.log(leaveTypeValue) ;
+    } else if (leaveTypeValue  == 'Sick') {
+      console.log(leaveTypeValue );
+    } else if (leaveTypeValue  == 'Floater') {
+      console.log(leaveTypeValue );
+    }
+    else{
+      console.log(leaveTypeValue);
+    }
   }
-}
+  
+} )

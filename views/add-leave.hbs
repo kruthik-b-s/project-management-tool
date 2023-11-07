@@ -13,26 +13,26 @@
     <h2>Leave Application Form</h2>
     <form id="apply-leave-form" action="/api/leaves/createLeaveform" method="POST">
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Employee ID</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="employee_id"
-                name="leave_application_employee_id" required>
+            <label for="exampleFormControlInput1" class="form-label">Employee ID </label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="{{leaves.employee_leave_id}}"
+                name="leaves_employee_leave_id"  value="{{leaves.employee_leave_id}}">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Leave type</label>
-            <select class="form-select" aria-label="Default select example" name="leave_type" required
-                onchange="optionSelected()">
-                <option selected>Open this select menu</option>
-                <option value=" 1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="form-select" id= "leaveType" aria-label="Default select example" name="leave_type" required>
+                <option selected>Open this select menu </option>
+                <option value="Casual">Casual Leave - Pending : {{leaves.casual_leaves}}</option> 
+                <option value="Sick">Sick Leave  - Pending : {{leaves.sick_leaves}}</option>
+                <option value="Floater">Floater Leave  - Pending :  {{leaves.floater_leaves}}</option>
+                <option value="Unpaid">Unpaid Leave </option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label date-label">From date: </label>
-            <input type="date" id="till_date" name="till_date" class="calendar-input" required>
+            <label for="from_date" class="form-label date-label">From date: </label>
+            <input type="date" id="from_date" name="from_date" class="calendar-input" required>
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label date-label">To date: </label>
+            <label for="till_date" class="form-label date-label">To date: </label>
             <input type="date" id="till_date" name="till_date" class="calendar-input" required>
         </div>
         <div class="mb-3">
@@ -45,4 +45,4 @@
     </form>
 </div>
 
-<script src="../scripts/leaveform.js"></script>
+<script src="/scripts/leaveform.js"></script>

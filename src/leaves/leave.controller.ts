@@ -95,12 +95,21 @@ export class LeavesController {
   }
 
   @Get('addLeave')
-  @Render('add-leave')
-  LeaveForm() {}
+  // @Render('add-leave')
+  async getLeavetype(@Res() res: Response, @Req() req: Request) {
+    const payload = await this.jwtUtil.getTokenPayload(req);
+    let id = payload["sub"];
+    console.log(payload["sub"])
+    const leaves = await this.service.getLeavetype(id);
+    res.render("add-leave",{leaves: leaves})
+  }
+  // LeaveForm() {}
+  
 
   @Post('createLeaveform')
   @Render('homeUser')
   createLeave(@Body() leaveDetails: LeaveDto) {
+    console.log(leaveDetails)
     try {
       this.service.createLeave(leaveDetails);
     } catch (error) {
@@ -108,8 +117,9 @@ export class LeavesController {
     }
   }
 
-  @Get('getleaveType')
-  async getLeavetype() {
-    return await this.service.getLeavetype();
-  }
+  // @Get('getleaveType')
+  // async getLeavetype(@Res() res: Response) {
+  //   const leaves = await this.service.getLeavetype();
+  //   res.render("add-leave",{leaves: leaves})
+  // }
 }
