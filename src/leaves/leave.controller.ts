@@ -109,9 +109,11 @@ export class LeavesController {
   @Post('createLeaveform')
   @Render('homeUser')
   createLeave(@Body() leaveDetails: LeaveDto) {
-    console.log(leaveDetails)
+    console.log("controller-->>",leaveDetails)
+
     try {
       this.service.createLeave(leaveDetails);
+      this.service.updateLeave(leaveDetails.leave_application_employee_id,leaveDetails.leave_type)
     } catch (error) {
       throw new Error(error.message);
     }

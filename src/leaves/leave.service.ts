@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LeaveDto } from "src/dto's/leave.dto";
 import { errorMonitor } from 'events';
+import { error } from 'console';
 
 @Injectable()
 export class LeavesService {
@@ -81,6 +82,41 @@ export class LeavesService {
       console.log(error.message)
       return { message: 'Failed to apply leave', error: error.message };
     }
+  }
+
+  async updateLeave(leaveId,leaveType){
+    // console.log("service-->>",leaveId,"",leaveType)
+    leaveId = parseInt(leaveId)
+    try{
+      const leavesDB = await this.prisma.leave.findUnique({
+        where:{
+          employee_leave_id: leaveId
+        }
+      })
+      // console.log("service  leavesDB  -->>",leavesDB)
+      if(leavesDB[leaveType]>0){
+        leavesDB[leaveType] -=1;
+      }else(
+        console.log("Current leaves are empty")
+        // Rendered in webpage or disable that leave option
+      )
+      
+
+    const updatedLeavesDB = await this.prisma.leave.update({
+        where:{
+          employee_leave_id: leaveId
+        },data:{
+          sick_leaves:leavesDB.sick_leaves,
+          casual_leaves:leavesDB.casual_leaves,
+          floater_leaves:leavesDB.floater_leaves,
+        }
+      })
+      console.log("  service  updatedLeavesDB  -->>",updatedLeavesDB)
+    }
+    catch(error){
+      console.log(error.message)
+    }
+    
   }
 
   async getLeavetype(id) {
