@@ -19,6 +19,8 @@
     id='apply-leave-form'
     action='/api/leaves/createLeaveform'
     method='POST'
+    class='needs-validation'
+    novalidate
   >
     <div class='mb-3'>
       <label for='exampleFormControlInput1' class='form-label'>Employee ID
@@ -41,7 +43,9 @@
         name='leave_type'
         required
       >
-        <option selected>Open this select menu </option>
+        <option selected disabled value='' style='display: none;'>Open this
+          select menu
+        </option>
         <option value='casual_leaves'>Casual Leave - Pending :
           {{leaves.casual_leaves}}</option>
         <option value='sick_leaves'>Sick Leave - Pending :
@@ -50,6 +54,9 @@
           {{leaves.floater_leaves}}</option>
         <option value='Unpaid_leaves'>Unpaid Leave </option>
       </select>
+      <div class='invalid-feedback'>
+        Please select a valid leave type.
+      </div>
     </div>
     <div class='mb-3'>
       <label for='from_date' class='form-label date-label'>From date: </label>

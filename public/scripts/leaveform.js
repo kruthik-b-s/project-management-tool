@@ -3,6 +3,7 @@ document.title = 'Project Management Tool | Apply leave';
 console.log('hii');
 
 const leaveType = document.querySelector('#leaveType');
+console.log(leaveType.value)
 
 // Get the <select> element by its ID
 var selectElement = document.getElementById('leaveType');
@@ -38,3 +39,24 @@ leaveType.addEventListener('change', () => {
     }
   }
 });
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
