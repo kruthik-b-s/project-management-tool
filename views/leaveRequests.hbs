@@ -24,12 +24,12 @@
             <div class="card w-100 mb-3" id="leave-card">
                 <div class="card-body">
 
-                    <div class="card-title">Employee-ID : {{this.leave_application_employee_id}}</div>
-                    <div class="card-status" id="status-{{this.leave_application_id}}">Status:{{this.status}}</div>
-                    <div class="card-text">{{this.reason}}</div>
-                    <div class="card-from_date dateElement">from_date:{{this.from_date}}</div>
-                    <div class="card-till_date dateElement">till_date:{{this.till_date}}</div>
-                    {{#if this.comments}}<div class="card-comments">Comments : {{this.comments}}</div>{{/if}}
+                    <div class="card-title"><b>Employee-ID : </b> {{this.leave_application_employee_id}}</div>
+                    <div class="card-status" id="status-{{this.leave_application_id}}"><b> Status: </b>{{this.status}}</div>
+                    <div class="card-text"><b>Reason: </b>{{this.reason}}</div>
+                    <div class="card-from_date dateElement">from_date: {{this.from_date}}</div>
+                    <div class="card-till_date dateElement">till_date: {{this.till_date}}</div>
+                    {{#if this.comments}}<div class="card-comments"><b>Comments : </b>{{this.comments}}</div>{{/if}}
                     {{#unless this.comments}}
                     <div class="mb-3">
                         <label for="comm-{{this.leave_application_id}}" class="form-label">Comments</label>
