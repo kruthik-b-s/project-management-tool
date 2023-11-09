@@ -5,6 +5,7 @@ import {
   Param,
   Post,
   Query,
+  Redirect,
   Req,
   Res,
   UseGuards,
@@ -126,5 +127,11 @@ export class EmployeeController {
       pageDetails,
     );
     res.render('employeesOnProject', { employees });
+  }
+
+  @Post('updateEmployee/:id')
+  async updateEmployeeDetails(@Param('id') id: number, @Body() FormData,@Res() res:Response){
+    await this.service.updateEmployeeDetails(id,FormData)
+    res.redirect(`/api/employee/getEmployee/${id}`)
   }
 }

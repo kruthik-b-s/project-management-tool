@@ -187,4 +187,33 @@ export class EmployeeService {
       totalPages: Math.ceil(employeeCount / perPageData),
     };
   }
+
+  async updateEmployeeDetails(id,data)
+  {
+    let id_int = parseInt(id)
+    data.reporting_to = parseInt(data.reporting_to)
+    let role_id;
+    switch(data.role){
+      case "superadmin": role_id =1;
+                         break;
+      case "user": role_id =2;
+                   break;
+      case "admin": role_id =3;
+                    break;
+    }
+
+    const updateUser = await this.prisma.employee.update({
+      where: {
+        employee_id: id_int,
+      },
+      data: {
+        employee_name: data. employee_name ,
+        department: data.department,
+        phone_number: data.phone_number,
+        reporting_to_employee_id: data.reporting_to,
+        employee_role_id: role_id
+      },
+    })
+    return updateUser;
+  }
 }
