@@ -31,11 +31,11 @@ dateElements.forEach((dateElement) => {
   if (isoDate.includes('from_date:')) {
     isoDate.replace('from_date:', '');
     let localDate = convertISOToLocal(isoDate);
-    dateElement.innerText = 'From_date: ' + localDate;
+    dateElement.innerHTML = '<b>From_date: </b>' + localDate;
   } else if (isoDate.includes('till_date:')) {
     isoDate.replace('till_date:', '');
     let localDate = convertISOToLocal(isoDate);
-    dateElement.innerText = 'Till_date: ' + localDate;
+    dateElement.innerHTML = '<b>Till_date: </b>' + localDate;
   }
   // console.log('---->>', isoDate);
 });
