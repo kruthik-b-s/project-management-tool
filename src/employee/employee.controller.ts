@@ -5,6 +5,7 @@ import {
   Param,
   Post,
   Query,
+  Redirect,
   Req,
   Res,
   UseGuards,
@@ -69,6 +70,7 @@ export class EmployeeController {
       const employee = await this.service.getEmployeeDetailsById(parseInt(id));
 
       if (payload['role'] === 'superadmin' || payload['role'] === 'admin') {
+        console.log('Emp --->>>', employee);
         res.render('employeeDetails', { employee });
       } else {
         res.redirect('/pages/unauthorised.html');
@@ -126,5 +128,23 @@ export class EmployeeController {
       pageDetails,
     );
     res.render('employeesOnProject', { employees });
+  }
+
+  @Post('updateEmployee/:id')
+  async updateEmployeeDetails(
+    @Param('id') id: number,
+    @Body() FormData,
+    @Res() res: Response,
+  ) {
+    await this.service.updateEmployeeDetails(id, FormData);
+    res.redirect(`/api/employee/getEmployee/${id}`);
+  }
+
+  @Post('removeEmployee')
+  async updateEmployeeProjectDetails(@Query() idObject, @Res() res: Response) {
+    console.log('Controller working', idObject);
+    await this.service.updateEmployeeProjectDetails(idObject);
+
+    res.redirect(`/api/employee/getEmployee/${parseInt(idObject.employeeId)}`);
   }
 }
