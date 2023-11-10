@@ -58,6 +58,7 @@ export class EmployeeService {
           },
           projects: {
             select: {
+              project_id: true,
               project_name: true,
               client: true,
               start_date: true,
@@ -188,18 +189,20 @@ export class EmployeeService {
     };
   }
 
-  async updateEmployeeDetails(id,data)
-  {
-    let id_int = parseInt(id)
-    data.reporting_to = parseInt(data.reporting_to)
+  async updateEmployeeDetails(id, data) {
+    let id_int = parseInt(id);
+    data.reporting_to = parseInt(data.reporting_to);
     let role_id;
-    switch(data.role){
-      case "superadmin": role_id =1;
-                         break;
-      case "user": role_id =2;
-                   break;
-      case "admin": role_id =3;
-                    break;
+    switch (data.role) {
+      case 'superadmin':
+        role_id = 1;
+        break;
+      case 'user':
+        role_id = 2;
+        break;
+      case 'admin':
+        role_id = 3;
+        break;
     }
 
     const updateUser = await this.prisma.employee.update({
@@ -207,13 +210,35 @@ export class EmployeeService {
         employee_id: id_int,
       },
       data: {
-        employee_name: data. employee_name ,
+        employee_name: data.employee_name,
         department: data.department,
         phone_number: data.phone_number,
         reporting_to_employee_id: data.reporting_to,
-        employee_role_id: role_id
+        employee_role_id: role_id,
       },
-    })
+    });
     return updateUser;
+  }
+
+  async updateEmployeeProjectDetails(idObject) {
+    try {
+      // Update the project to disconnect the employee
+      await this.prisma.project.update({
+        where: { project_id: parseInt(idObject.projectId) },
+        data: {
+          employees: {
+            disconnect: { employee_id: parseInt(idObject.employeeId) },
+          },
+        },
+      });
+
+      console.log(
+        `Employee with ID ${idObject.employeeId} removed from Project ${idObject.projectId}.`,
+      );
+    } catch (error) {
+      console.error(`Error removing employee from project: ${error.message}`);
+    } finally {
+      await this.prisma.$disconnect();
+    }
   }
 }
