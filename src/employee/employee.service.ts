@@ -27,6 +27,7 @@ export class EmployeeService {
       user = await this.prisma.employee.create({
         data: {
           employee_name: userDetails.employee_name,
+          phone_number:userDetails.phone_number,
           email: userDetails.email,
           department: userDetails.department,
           Role: {

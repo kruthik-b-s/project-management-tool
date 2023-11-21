@@ -51,6 +51,15 @@ async function bootstrap() {
         dateFormat: (data) => {
           return new Date(data).toLocaleDateString();
         },
+        getMonthName: (monthNumber) => {
+          const months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+          ];
+  
+          const adjustedMonthNumber = Math.max(1, Math.min(12, monthNumber));
+          return months[adjustedMonthNumber - 1];
+        },
       },
     }),
   );
