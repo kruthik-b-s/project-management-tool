@@ -195,6 +195,8 @@ export class ProjectService {
           select: {
             project_detail_id: true,
             notes: true,
+            project_url:true,
+            tech_stack:true,
           },
         },
       },
@@ -230,5 +232,5 @@ export class ProjectService {
     };
   }
 
-  
+
 }

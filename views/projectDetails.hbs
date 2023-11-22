@@ -36,7 +36,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="notes"
                     disabled>{{project.project_details.notes}}</textarea>
                 <div id="file-submit" class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button id="add-note" class="btn btn-primary me-md-2" type="button">Add notes</button>
+                    <button id="add-note" class="btn btn-primary me-md-2" type="button">Add/Edit notes</button>
                     <button class="btn btn-primary" type="submit">update</button>
                 </div>
             </form>
@@ -44,22 +44,16 @@
     </div>
     <div class="files-div">
         <div class="projects-title">
-            <p>Files</p>
+            <p>File for the Project</p>
         </div>
         <div class="files">
             <div class="card w-100">
                 <div class="card-body">
-                    <h5 class="card-title">File name</h5>
-                    <p class="card-text">File description</p>
-                    <a href="#" class="btn btn-primary">Download</a>
+                    <h5 class="card-title">{{project.project_name}}</h5>
+                    <p class="card-text"> Tech Stack: {{project.project_details.tech_stack}}</p>
+                    <a href="{{project.project_details.project_url}}" class="btn btn-primary" target="_blank">Project URL</a>
                 </div>
             </div>
-            <div class="card w-100">
-                <div class="card-body">
-                    <h5 class="card-title">File name</h5>
-                    <p class="card-text">File description</p>
-                    <a href="#" class="btn btn-primary">Download</a>
-                </div>
             </div>
         </div>
     </div>
