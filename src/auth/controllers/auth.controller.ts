@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Redirect, Req, Res, UseGuards } from '@nestjs/common';
 import { GoogleAuthGuard } from '../guards/google.guard';
 import { AuthService } from '../services/auth.service';
 import { Request, Response } from 'express';
@@ -58,5 +58,11 @@ export class AuthController {
     } else {
       res.render('homeUser');
     }
+  }
+
+  @Get('logout')
+  @Redirect('/')
+  async logOut(@Req() req: Request, @Res() res: Response) {
+    res.clearCookie('accessToken');
   }
 }
