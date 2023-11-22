@@ -5,6 +5,6 @@ export class AppController {
   @Get()
   @Render('main')
   index() {
-    return { message: 'Please login' };
+    return { message: ' Login to Project Management Tool' };
   }
 }
