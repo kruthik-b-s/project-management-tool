@@ -5,16 +5,22 @@ import {
   Param,
   Post,
   Query,
+  Redirect,
   Render,
   Req,
   Res,
+  UploadedFile,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { Request, Response } from 'express';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { JwtUtils } from 'src/auth/utils/jwt.utils';
 import { CreateNotes, CreateProjectDto } from "src/dto's/auth.dto";
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @UseGuards(JwtGuard)
 @Controller('api/project')
@@ -84,4 +90,24 @@ export class ProjectController {
       project: projectDetails.project,
     });
   }
+
+  
+  @Post('upload/:project_id')
+  // @Render('projectDetails/:project_id')
+  @UseInterceptors(FileInterceptor('file',{
+    storage:diskStorage({
+      destination:"./project-files",
+      filename:(req,file,cb) =>{
+       cb(null,`${file.originalname}`)
+      }
+    })
+  }))
+  async uploadFile(
+    @Param('project_id') project_id: string,
+    @Res() res: Response,
+  ) {
+    console.log("file upload success");
+    res.redirect(`/api/project/projectDetails/${project_id}`)
+  }
+
 }

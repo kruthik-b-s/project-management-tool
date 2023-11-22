@@ -22,9 +22,9 @@
 <div class="project-details">
     <div class="uploads-div">
         <div class="mb-3">
-            <form action="#" method="post">
+            <form action="/api/project/upload/{{project.project_id}}" method="post" enctype="multipart/form-data">
                 <label for="formFileMultiple" class="form-label">Upload files to project</label>
-                <input class="form-control" type="file" id="formFileMultiple" multiple>
+                <input class="form-control" name="file" type="file" id="formFileMultiple" multiple>
                 <div id="file-submit" class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-primary" type="submit">upload</button>
                 </div>
