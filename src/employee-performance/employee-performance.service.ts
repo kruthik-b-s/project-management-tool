@@ -131,7 +131,7 @@ export class EmployeePerformanceService {
     };
   }
 
-  async addEmployeeRating(
+  async addEmployeeRating(manager_id:number,
     emp_id: string,
     ratingObj: { rating: string; comments: string; monthYear: string },
   ) {
@@ -144,7 +144,7 @@ export class EmployeePerformanceService {
         comments: comments,
         for_month: parseInt(month),
         for_year: parseInt(year),
-        given_by_employee_id: 1,
+        given_by_employee_id: manager_id,
         Employee: {
           connect: {
             employee_id: parseInt(emp_id),

@@ -61,10 +61,13 @@ export class EmployeePerformanceController {
   @Post('addRating')
   async addRatingToEmployee(
     @Res() res: Response,
+    @Req() req: Request,
     @Query() emp_id: { emp_id: string },
     @Body() ratingObj: { rating: string; comments: string; monthYear: string },
   ) {
-    await this.service.addEmployeeRating(emp_id.emp_id, ratingObj);
+    const payload = await this.jwtUtil.getTokenPayload(req);
+    const manager_id = payload['sub']
+    await this.service.addEmployeeRating(manager_id,emp_id.emp_id, ratingObj);
     res.redirect('/api/employee/viewAllEmployees?page=1&perPage=8');
   }
 }
