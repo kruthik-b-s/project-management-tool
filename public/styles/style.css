@@ -40,7 +40,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
+  background-image: url('../assets/images/pmt-wallpaper.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  );
 }
 
 .new-employee {
@@ -67,10 +77,11 @@ label {
 #login-card {
   width: 20rem;
   height: fit-content;
+  background: rgba(255, 255, 255, 0.3);
+  margin-top: 10rem;
 }
 
-#login-card > .card-body{
-  padding: 0;
+#login-card > .card-body {
   display: flex;
   flex-direction: column;
   gap: 3rem;
