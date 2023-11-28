@@ -9,9 +9,7 @@ const rejectDisable = (id) => {
   }
 };
 
-// Select all <div> elements with querySelectorAll
 const dateElements = document.querySelectorAll('.dateElement');
-console.log(dateElements);
 // Define a function to convert ISO dates to local format
 function convertISOToLocal(isoDate) {
   const date = new Date(isoDate);
@@ -63,7 +61,6 @@ const updateStatus = (id, decision) => {
   acceptBtn.disabled = true;
   rejectBtn.disabled = true;
   statusText.textContent = `Status:${decision}`;
-  console.log("-->>>>>>> type-->>",leaveTypeText.textContent);
 
   if (decision == 'approve' && commentBox.value.trim('').length == 0) {
     commentBox.value = 'approved';

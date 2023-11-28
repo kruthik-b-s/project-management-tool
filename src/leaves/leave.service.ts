@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LeaveDto } from "src/dto's/leave.dto";
-import { errorMonitor } from 'events';
-import { error } from 'console';
 
 @Injectable()
 export class LeavesService {
@@ -127,7 +125,7 @@ if(updatedStatus=="reject"){
   }
 
   async updateLeave(leaveId, leaveType) {
-    // console.log("service-->>",leaveId,"",leaveType)
+
     leaveId = parseInt(leaveId);
     try {
       const leavesDB = await this.prisma.leave.findUnique({
@@ -135,7 +133,7 @@ if(updatedStatus=="reject"){
           employee_leave_id: leaveId,
         },
       });
-      // console.log("service  leavesDB  -->>",leavesDB)
+      
       if (leavesDB[leaveType] > 0) {
         leavesDB[leaveType] -= 1;
       } 
