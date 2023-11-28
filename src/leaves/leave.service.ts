@@ -51,8 +51,50 @@ export class LeavesService {
     return leaves;
   }
 
-  async UpdateStatus(id, updatedStatus, newComments) {
+  async UpdateStatus(id, updatedStatus, newComments,leaveType) {
     id = parseInt(id);
+    leaveType = leaveType.split(":")[1].trim()
+
+    if(leaveType=="Casual"){leaveType="casual_leaves"}
+    else if(leaveType=="Sick"){leaveType="sick_leaves"}
+    else if(leaveType=="Floater"){leaveType="floater_leaves"}
+
+if(updatedStatus=="reject"){
+  try {
+
+    const emp_id = await this.prisma.leaveApplication.findUnique({
+      where: {
+        leave_application_id: id,
+      },
+      select: {
+        leave_application_employee_id: true,
+      },
+    });
+
+    const leavesDB = await this.prisma.leave.findUnique({
+      where: {
+        employee_leave_id: emp_id.leave_application_employee_id,
+      },
+    });
+    if (leavesDB[leaveType] >= 0) {
+      leavesDB[leaveType] += 1;
+    } 
+    const updatedLeavesDB = await this.prisma.leave.update({
+      where: {
+        employee_leave_id: emp_id.leave_application_employee_id,
+      },
+      data: {
+        sick_leaves: leavesDB.sick_leaves,
+        casual_leaves: leavesDB.casual_leaves,
+        floater_leaves: leavesDB.floater_leaves,
+      },
+    });
+    console.log('  service  updatedLeavesDB  -->>', updatedLeavesDB);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
     const updatedLeaveStatus = await this.prisma.leaveApplication.update({
       where: { leave_application_id: id },
       data: {

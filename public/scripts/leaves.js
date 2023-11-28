@@ -57,12 +57,13 @@ const updateStatus = (id, decision) => {
   const acceptBtn = document.querySelector(`#accept-${id}`);
   const rejectBtn = document.querySelector(`#reject-${id}`);
   const statusText = document.querySelector(`#status-${id}`);
+  const leaveTypeText = document.querySelector(`#type-${id}`);
   const commentBox = document.querySelector(`#comm-${id}`);
 
   acceptBtn.disabled = true;
   rejectBtn.disabled = true;
   statusText.textContent = `Status:${decision}`;
-  console.log(decision);
+  console.log("-->>>>>>> type-->>",leaveTypeText.textContent);
 
   if (decision == 'approve' && commentBox.value.trim('').length == 0) {
     commentBox.value = 'approved';
@@ -72,6 +73,7 @@ const updateStatus = (id, decision) => {
     id: id,
     status: decision,
     comments: commentBox.value,
+    leaveType: leaveTypeText.textContent,
   };
   const options = {
     method: 'POST',

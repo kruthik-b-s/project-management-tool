@@ -62,6 +62,7 @@ export class LeavesController {
       newStatus.id,
       newStatus.status,
       newStatus.comments,
+      newStatus.leaveType,
     );
     res.redirect('viewAllLeaves');
   }
